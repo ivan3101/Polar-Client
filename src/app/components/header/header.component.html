@@ -1,14 +1,17 @@
 <clr-header>
   <div class="branding">
-    <a href="#" class="nav-link"><img src="assets/images/header-logo-empresas-polar.png" alt="Alimentos Polar" title="Alimentos Polar"></a>
+    <a routerLink="/home" class="nav-link"><img src="assets/images/header-logo-empresas-polar.png" alt="Alimentos Polar" title="Alimentos Polar"></a>
   </div>
   <div class="header-nav" [clr-nav-level]="1">
-    <a href="javascript://" class="nav-link nav-text">Productos</a>
-    <a href="javascript://" class="nav-link nav-text">Sobre nosotros</a>
-    <a href="javascript://" class="nav-link nav-text">Contactanos</a>
+    <a routerLink="/products" routerLinkActive="active" class="nav-link nav-text">Productos</a>
+    <a routerLink="/about-us" routerLinkActive="active" class="nav-link nav-text">Sobre nosotros</a>
+    <a routerLink="/contact-us" routerLinkActive="active" class="nav-link nav-text">Contactanos</a>
   </div>
   <div class="header-actions">
-    <a href="javascript://" class="nav-link nav-icon">
+    <a class="nav-link nav-icon">
+      <clr-icon shape="shopping-cart" class="is-solid"></clr-icon>
+    </a>
+    <a class="nav-link nav-icon">
       <clr-icon shape="user" class="is-solid"></clr-icon>
     </a>
   </div>

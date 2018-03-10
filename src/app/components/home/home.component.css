@@ -1,0 +1,17 @@
+h1 {
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 4em;
+  text-align: center;
+  position: relative;
+  top: 47%;
+  transform: translateY(-47%);
+}
+
+button {
+  margin: 15px auto;
+  display: block;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
