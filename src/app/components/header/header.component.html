@@ -8,11 +8,24 @@
     <a routerLink="/contact-us" routerLinkActive="active" class="nav-link nav-text">Contactanos</a>
   </div>
   <div class="header-actions">
-    <a class="nav-link nav-icon">
-      <clr-icon shape="shopping-cart" class="is-solid"></clr-icon>
-    </a>
-    <a class="nav-link nav-icon">
-      <clr-icon shape="user" class="is-solid"></clr-icon>
-    </a>
+    <div *ngIf="innerWidth > 768; else mobile">
+      <button class="btn btn-icon btn-link" style="color: #F4F1E6;" (click)="onOpenCart()">
+        <clr-icon shape="shopping-cart" class="is-solid"></clr-icon>
+        Carrito
+      </button>
+      <button class="btn btn-icon btn-link" style="color: #F4F1E6;" (click)="onOpenUser()">
+        <clr-icon shape="user" class="is-solid"></clr-icon>
+        Identificarse
+      </button>
+    </div>
+
+    <ng-template #mobile>
+      <a class="nav-link nav-icon" style="color: #F4F1E6;" (click)="onOpenCart()">
+        <clr-icon shape="shopping-cart" class="is-solid"></clr-icon>
+      </a>
+      <a class="nav-link nav-icon" style="color: #F4F1E6;" (click)="onOpenUser()">
+        <clr-icon shape="user" class="is-solid"></clr-icon>
+      </a>
+    </ng-template>
   </div>
 </clr-header>

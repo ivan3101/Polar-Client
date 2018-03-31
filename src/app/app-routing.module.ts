@@ -12,7 +12,7 @@ const appRoutes: Routes = [
   {path: 'products', component: ProductsComponent, children: [
       {path: '', redirectTo: 'all', pathMatch: 'full'},
       {path: 'all', component: GridProductsComponent},
-      {path: 'brand/:id', component: GridProductsComponent},
+      {path: 'brand/:brand', component: GridProductsComponent},
       {path: 'unavailable', component: GridProductsComponent}
     ]},
   {path: 'about-us', component: AboutUsComponent},

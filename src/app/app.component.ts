@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {AfterContentChecked, Component} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
@@ -6,9 +6,20 @@ import {ActivatedRoute, Router} from "@angular/router";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  constructor(private route: Router) {  }
+export class AppComponent implements AfterContentChecked {
+  session;
+  constructor(private route: Router) {
+    this.session = false;
+  }
+
+  ngAfterContentChecked() {
+    this.checkToken();
+  }
+
   checkRoute(url: string) {
     return this.route.url === url;
+  }
+  checkToken() {
+    this.session = !localStorage.getItem('token');
   }
 }

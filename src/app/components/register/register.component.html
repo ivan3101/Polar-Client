@@ -1,0 +1,247 @@
+<clr-wizard #wizardmd [(clrWizardOpen)]="open" [clrWizardDisableStepnav]="registered" [clrWizardForceForwardNavigation]="true" clrWizardSize="lg" #wizard>
+  <clr-wizard-title>Registrar cliente</clr-wizard-title>
+
+  <clr-wizard-button [type]="'cancel'">Cancelar</clr-wizard-button>
+  <clr-wizard-button [type]="'previous'">Regresar</clr-wizard-button>
+  <clr-wizard-button [type]="'next'">Siguiente</clr-wizard-button>
+  <clr-wizard-button [type]="'finish'">Finalizar</clr-wizard-button>
+
+  <clr-wizard-page [clrWizardPageNextDisabled]="!basicForm.valid">
+    <ng-template clrPageTitle>Información del negocio</ng-template>
+    <form [formGroup]="basicForm">
+      <section class="form-block">
+        <div class="form-group row">
+          <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+            <label for="businessName" class="required">Nombre del negocio</label>
+          </div>
+          <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+            <label for="businessName" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-left tooltip-sm form-control"
+                   [class.invalid]="basicForm.get('businessName').invalid
+                    && (basicForm.get('businessName').dirty || basicForm.get('businessName').touched)">
+              <input type="text" id="businessName" placeholder="Inversiones ejemplo" formControlName="businessName" class="form-control">
+              <span class="tooltip-content" *ngIf="basicForm.get('businessName').errors && (basicForm.get('businessName').errors.required && (basicForm.get('businessName').dirty || basicForm.get('businessName').touched))">
+                                Debe ingresar el nombre del negocio
+                            </span>
+              <span class="tooltip-content" *ngIf="basicForm.get('businessName').errors && (basicForm.get('businessName').errors.pattern && (basicForm.get('businessName').dirty || basicForm.get('businessName').touched))">
+                                Solo puede contener letras, numeros y espacios
+                            </span>
+            </label>
+          </div>
+        </div>
+        <div class="form-group row" formGroupName="rif">
+          <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+            <label for="letter" class="required">RIF</label>
+          </div>
+          <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+            <div class="select form-control">
+              <select name="letter" id="letter" formControlName="letter">
+                <option value="e">E</option>
+                <option value="g">G</option>
+                <option value="j">J</option>
+                <option value="p">P</option>
+                <option value="v">V</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+            <label for="number" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-left tooltip-sm form-control"
+                   [class.invalid]="basicForm.get('rif.number').invalid
+                    && (basicForm.get('rif.number').dirty || basicForm.get('rif.number').touched)">
+              <input type="text" id="number" placeholder="12345678" formControlName="number" class="form-control">
+              <span class="tooltip-content" *ngIf="basicForm.get('rif.number').errors && (basicForm.get('rif.number').errors.required && (basicForm.get('rif.number').dirty || basicForm.get('rif.number').touched))">
+                                Debe ingresar el RIF del negocio
+                            </span>
+              <span class="tooltip-content" *ngIf="basicForm.get('rif.number').errors && (basicForm.get('rif.number').errors.pattern && (basicForm.get('rif.number').dirty || basicForm.get('rif.number').touched))">
+                                Solo puede contener numeros y debe tener 8 numeros
+                            </span>
+            </label>
+          </div>
+          <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+            <label for="digit" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-left tooltip-sm form-control"
+                   [class.invalid]="basicForm.get('rif.digit').invalid
+                    && (basicForm.get('rif.digit').dirty || basicForm.get('rif.digit').touched)">
+              <input type="text" id="digit" placeholder="9" formControlName="digit" class="form-control">
+              <span class="tooltip-content" *ngIf="basicForm.get('rif.digit').errors && (basicForm.get('rif.digit').errors.required && (basicForm.get('rif.digit').dirty || basicForm.get('rif.digit').touched))">
+                                Debe ingresar el numero final del RIF
+                            </span>
+              <span class="tooltip-content" *ngIf="basicForm.get('rif.digit').errors && (basicForm.get('rif.digit').errors.pattern && (basicForm.get('rif.digit').dirty || basicForm.get('rif.digit').touched))">
+                                Solo puede contener 1 numero
+                            </span>
+            </label>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+            <label for="address" class="required">Dirección</label>
+          </div>
+          <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+            <textarea type="text" id="address" placeholder="" formControlName="address" class="form-control" rows="7"></textarea>
+          </div>
+        </div>
+      </section>
+    </form>
+  </clr-wizard-page>
+
+  <clr-wizard-page [clrWizardPageNextDisabled]="!contactForm.valid">
+    <ng-template clrPageTitle>Información de contacto</ng-template>
+    <form [formGroup]="contactForm">
+      <section class="form-block">
+        <div class="form-group row" formGroupName="tlpNumber">
+          <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+            <label for="prefix" class="required">Numero de telefono</label>
+          </div>
+          <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+            <label for="prefix" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-left tooltip-sm form-control"
+                   [class.invalid]="contactForm.get('tlpNumber.prefix').invalid
+                    && (contactForm.get('tlpNumber.prefix').dirty || contactForm.get('tlpNumber.prefix').touched)">
+              <input type="text" id="prefix" placeholder="0123" formControlName="prefix" class="form-control">
+              <span class="tooltip-content" *ngIf="contactForm.get('tlpNumber.prefix').errors && (contactForm.get('tlpNumber.prefix').errors.required && (contactForm.get('tlpNumber.prefix').dirty || contactForm.get('tlpNumber.prefix').touched))">
+                                Debe ingresar el prefijo del numero
+                            </span>
+              <span class="tooltip-content" *ngIf="contactForm.get('tlpNumber.prefix').errors && (contactForm.get('tlpNumber.prefix').errors.pattern && (contactForm.get('tlpNumber.prefix').dirty || contactForm.get('tlpNumber.prefix').touched))">
+                                Solo puede contener un maximo de 4 numeros
+                            </span>
+            </label>
+          </div>
+          <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+            <label for="tlpNumber" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-left tooltip-sm form-control"
+                   [class.invalid]="contactForm.get('tlpNumber.number').invalid
+                    && (contactForm.get('tlpNumber.number').dirty || contactForm.get('tlpNumber.number').touched)">
+              <input type="text" id="tlpNumber" placeholder="1234567" formControlName="number" class="form-control">
+              <span class="tooltip-content" *ngIf="contactForm.get('tlpNumber.number').errors && (contactForm.get('tlpNumber.number').errors.required && (contactForm.get('tlpNumber.number').dirty || contactForm.get('tlpNumber.number').touched))">
+                                Debe ingresar del numero de telefono
+                            </span>
+              <span class="tooltip-content" *ngIf="contactForm.get('tlpNumber.number').errors && (contactForm.get('tlpNumber.number').errors.pattern && (contactForm.get('tlpNumber.number').dirty || contactForm.get('tlpNumber.number').touched))">
+                                Solo puede contener un maximo de 7 numeros
+                            </span>
+            </label>
+          </div>
+        </div>
+      </section>
+      <section class="form-block" formArrayName="ownerName">
+        <label for="">Dueño(s)<button type="button" class="btn btn-link btn-icon" (click)="onAddOwner()"><clr-icon shape="plus"></clr-icon></button></label>
+        <div class="form-group row" [formGroupName]="i" *ngFor="let owner of contactForm.get('ownerName').controls; let i=index">
+          <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+            <label [for]="i+'.0'" class="required">Nombre Completo</label>
+          </div>
+          <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+            <label [for]="i+'.0'" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-left tooltip-sm form-control"
+                   [class.invalid]="contactForm.get('ownerName').controls[i].get('firstname').invalid
+                    && (contactForm.get('ownerName').controls[i].get('firstname').dirty || contactForm.get('ownerName').controls[i].get('firstname').touched)">
+              <input type="text" [id]="i+'.0'" placeholder="John" formControlName="firstname" class="form-control">
+              <span class="tooltip-content" *ngIf="contactForm.get('ownerName').controls[i].get('firstname').errors && (contactForm.get('ownerName').controls[i].get('firstname').errors.required && (contactForm.get('ownerName').controls[i].get('firstname').dirty || contactForm.get('ownerName').controls[i].get('firstname').touched))">
+                                Debe ingresar el nombre del dueño
+                            </span>
+              <span class="tooltip-content" *ngIf="contactForm.get('ownerName').controls[i].get('firstname').errors && (contactForm.get('ownerName').controls[i].get('firstname').errors.pattern && (contactForm.get('ownerName').controls[i].get('firstname').dirty || contactForm.get('ownerName').controls[i].get('firstname').touched))">
+                                Solo puede contener letras y espacios
+                            </span>
+            </label>
+          </div>
+          <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+            <label [for]="i+'.1'" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-left tooltip-sm form-control"
+                   [class.invalid]="contactForm.get('ownerName').controls[i].get('lastname').invalid
+                    && (contactForm.get('ownerName').controls[i].get('lastname').dirty || contactForm.get('ownerName').controls[i].get('lastname').touched)">
+              <input type="text" [id]="i+'.1'" placeholder="Smith" formControlName="lastname" class="form-control">
+              <span class="tooltip-content" *ngIf="contactForm.get('ownerName').controls[i].get('lastname').errors && (contactForm.get('ownerName').controls[i].get('lastname').errors.required && (contactForm.get('ownerName').controls[i].get('lastname').dirty || contactForm.get('ownerName').controls[i].get('lastname').touched))">
+                                Debe ingresar el apellido del dueño
+                            </span>
+              <span class="tooltip-content" *ngIf="contactForm.get('ownerName').controls[i].get('lastname').errors && (contactForm.get('ownerName').controls[i].get('lastname').errors.pattern && (contactForm.get('ownerName').controls[i].get('lastname').dirty || contactForm.get('ownerName').controls[i].get('lastname').touched))">
+                                Solo puede contener letras y espacios
+                            </span>
+            </label>
+          </div>
+          <div class="col-lg-1 col-md-12 col-sm-12 col-xs-12" *ngIf="i > 0">
+            <button class="btn btn-link btn-icon" (click)="onDeleteOwner(i)"><clr-icon shape="minus"></clr-icon></button>
+          </div>
+        </div>
+      </section>
+    </form>
+  </clr-wizard-page>
+
+  <clr-wizard-page [clrWizardPageNextDisabled]="!signinForm.valid" (clrWizardPageCustomButton)="doCustomClick($event)">
+    <ng-template clrPageTitle>Datos de cuenta</ng-template>
+    <form [formGroup]="signinForm">
+      <section class="form-block">
+        <div class="form-group row">
+          <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+            <label for="email" class="required">Correo electronico</label>
+          </div>
+          <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+            <label for="email" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-left tooltip-sm form-control"
+                   [class.invalid]="signinForm.get('email').invalid
+                    && (signinForm.get('email').dirty || signinForm.get('email').touched)">
+              <input type="email" id="email" placeholder="ejemplo@dominio.com" formControlName="email" class="form-control">
+              <span class="tooltip-content" *ngIf="signinForm.get('email').errors && (signinForm.get('email').errors.required && (signinForm.get('email').dirty || signinForm.get('email').touched))">
+                                Debe ingresar un correo electronico
+                            </span>
+              <span class="tooltip-content" *ngIf="signinForm.get('email').errors && (signinForm.get('email').errors.pattern && (signinForm.get('email').dirty || signinForm.get('email').touched))">
+                                No ingreso un correo electronico valido
+                            </span>
+            </label>
+          </div>
+        </div>
+        <section class="form-block" formGroupName="password">
+          <div class="form-group row">
+            <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+              <label for="newPassword" class="required">Contraseña</label>
+            </div>
+            <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+              <label for="newPassword" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-left tooltip-sm form-control"
+                     [class.invalid]="signinForm.get('password.newPassword').invalid
+                    && (signinForm.get('password.newPassword').dirty || signinForm.get('password.newPassword').touched)">
+                <input type="password" id="newPassword" placeholder="******" formControlName="newPassword" class="form-control">
+                <span class="tooltip-content" *ngIf="signinForm.get('password.newPassword').errors && (signinForm.get('password.newPassword').errors.required && (signinForm.get('password.newPassword').dirty || signinForm.get('password.newPassword').touched))">
+                                Debe ingresar una contraseña
+                            </span>
+                <span class="tooltip-content" *ngIf="signinForm.get('password.newPassword').errors && (signinForm.get('password.newPassword').errors.minLength && (signinForm.get('password.newPassword').dirty || signinForm.get('password.newPassword').touched))">
+                                La contraseña debe tener un minimo de 6 caracteres
+                            </span>
+              </label>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+              <label for="confirmPassword" class="required">Confirmar Contraseña</label>
+            </div>
+            <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+              <label for="confirmPassword" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-left tooltip-sm form-control"
+                     [class.invalid]="(signinForm.get('password.confirmPassword').invalid
+                    && (signinForm.get('password.confirmPassword').dirty || signinForm.get('password.confirmPassword').touched)) || (!signinForm.get('password').valid && signinForm.get('password.confirmPassword').valid && signinForm.get('password.confirmPassword').touched && signinForm.get('password.newPassword').valid && signinForm.get('password.newPassword').touched)">
+                <input type="password" id="confirmPassword" placeholder="******" formControlName="confirmPassword" class="form-control">
+                <span class="tooltip-content" *ngIf="signinForm.get('password.confirmPassword').errors && (signinForm.get('password.confirmPassword').errors.required && (signinForm.get('password.confirmPassword').dirty || signinForm.get('password.confirmPassword').touched))">
+                                Debe confirmar su contraseña
+                            </span>
+                <span class="tooltip-content" *ngIf="!signinForm.get('password').valid && signinForm.get('password.confirmPassword').valid && signinForm.get('password.confirmPassword').touched && signinForm.get('password.newPassword').valid && signinForm.get('password.newPassword').touched">
+                                Las contraseñas no coinciden
+                            </span>
+              </label>
+            </div>
+          </div>
+        </section>
+      </section>
+    </form>
+    <span class="spinner" *ngIf="loading">
+      Por favor, espere un momento
+    </span>
+    <ng-template clrPageButtons>
+      <clr-wizard-button [type]="'cancel'">Cancelar</clr-wizard-button>
+      <clr-wizard-button [type]="'previous'">Regresar</clr-wizard-button>
+      <clr-wizard-button [type]="'custom-next'">Registrar</clr-wizard-button>
+    </ng-template>
+  </clr-wizard-page>
+
+  <clr-wizard-page (clrWizardPageCustomButton)="doCustomClick($event)" (clrWizardPagePrevious)="onReturn()" #lastPage>
+    <ng-template clrPageTitle>Finalizar</ng-template>
+    <clr-alert [clrAlertType]="type" [clrAlertClosable]="false" [(clrAlertClosed)]="state">
+      <div clr-alert-item class="alert-item">
+        <span class="alert-text">
+            {{ message }}
+        </span>
+      </div>
+    </clr-alert>
+    <ng-template clrPageButtons>
+      <clr-wizard-button [type]="'previous'" *ngIf="!registered">Regresar</clr-wizard-button>
+      <clr-wizard-button [type]="'custom-finish'" *ngIf="registered">Finalizar</clr-wizard-button>
+    </ng-template>
+  </clr-wizard-page>
+</clr-wizard>
