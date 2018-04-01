@@ -25,6 +25,8 @@ import { RegisterComponent } from './components/register/register.component';
 import {AuthService} from "./services/auth.service";
 import { ClientPanelComponent } from './components/client-panel/client-panel.component';
 import { EmployeePanelComponent } from './components/employee-panel/employee-panel.component';
+import {ClientAuthService} from "./services/client-auth.service";
+import {EmployeeAuthService} from "./services/employee-auth.service";
 
 
 @NgModule({
@@ -57,6 +59,8 @@ import { EmployeePanelComponent } from './components/employee-panel/employee-pan
         UserService,
         AppAlertService,
         AuthService,
+        ClientAuthService,
+        EmployeeAuthService
     ],
     bootstrap: [AppComponent]
 })

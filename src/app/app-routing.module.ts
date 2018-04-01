@@ -7,6 +7,8 @@ import {ContactUsComponent} from "./components/contact-us/contact-us.component";
 import {GridProductsComponent} from "./components/grid-products/grid-products.component";
 import {ClientPanelComponent} from "./components/client-panel/client-panel.component";
 import {EmployeePanelComponent} from "./components/employee-panel/employee-panel.component";
+import {ClientAuthService} from "./services/client-auth.service";
+import {EmployeeAuthService} from "./services/employee-auth.service";
 
 const appRoutes: Routes = [
     {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -21,8 +23,8 @@ const appRoutes: Routes = [
     {path: 'contact-us', component: ContactUsComponent},
     {path: 'adm', children: [
             {path: '', redirectTo: '/products/all', pathMatch: 'full'},
-            {path: 'client/:id', component: ClientPanelComponent},
-            {path: 'employee/:id', component: EmployeePanelComponent}
+            {path: 'client/:id', component: ClientPanelComponent, canActivate: [ClientAuthService]},
+            {path: 'employee/:id', component: EmployeePanelComponent, canActivate: [EmployeeAuthService]}
         ]},
     {path: '**', redirectTo: '/home'}
 ];
