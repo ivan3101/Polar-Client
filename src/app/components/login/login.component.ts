@@ -3,6 +3,7 @@ import {UserService} from "../../services/user.service";
 import {Subscription} from "rxjs/Subscription";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AppAlertService} from "../../services/app-alert.service";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
     selector: 'app-login',
@@ -16,7 +17,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     loginForm: FormGroup;
     openModalSubscription: Subscription;
 
-    constructor(private userService: UserService, private appAlert: AppAlertService) {
+    constructor(private userService: UserService, private appAlert: AppAlertService, private authService: AuthService) {
         this.error = true;
         this.errMsg = '';
     }
@@ -44,8 +45,8 @@ export class LoginComponent implements OnInit, OnDestroy {
             this.userService.clientLogin(User).subscribe(
                 value => {
                     this.loginForm.reset();
-                    localStorage.setItem('user', JSON.stringify(value.user));
-                    localStorage.setItem('token', value.token);
+                    this.userService.setUser(value.user);
+                    this.authService.setToken(value.token);
                     this.appAlert.alertEvent.next({
                         'state': eval('false'),
                         'type': 'success',
@@ -62,8 +63,8 @@ export class LoginComponent implements OnInit, OnDestroy {
             this.userService.employeeLogin(User).subscribe(
                 value => {
                     this.loginForm.reset();
-                    localStorage.setItem('user', JSON.stringify(value.user));
-                    localStorage.setItem('token', value.token);
+                    this.userService.setUser(value.user);
+                    this.authService.setToken(value.token);
                     this.appAlert.alertEvent.next({
                         'state': eval('false'),
                         'type': 'success',

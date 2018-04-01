@@ -230,7 +230,7 @@
     </ng-template>
   </clr-wizard-page>
 
-  <clr-wizard-page (clrWizardPageCustomButton)="doCustomClick($event)" (clrWizardPagePrevious)="onReturn()" #lastPage>
+  <clr-wizard-page (clrWizardPageCustomButton)="doCustomClick($event)" #lastPage>
     <ng-template clrPageTitle>Finalizar</ng-template>
     <clr-alert [clrAlertType]="type" [clrAlertClosable]="false" [(clrAlertClosed)]="state">
       <div clr-alert-item class="alert-item">

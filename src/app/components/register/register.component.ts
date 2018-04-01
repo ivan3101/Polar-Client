@@ -3,6 +3,7 @@ import {UserService} from "../../services/user.service";
 import {Subscription} from "rxjs/Subscription";
 import {AppAlertService} from "../../services/app-alert.service";
 import {AbstractControl, FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
     selector: 'app-register',
@@ -22,7 +23,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     @ViewChild('wizard') wizard;
     @ViewChild('lastPage') lastPage;
     openRegisterSubscription: Subscription;
-    constructor(private userSerivce: UserService, private appAlertService: AppAlertService) {
+    constructor(private userService: UserService, private appAlertService: AppAlertService, private authSerive: AuthService) {
         this.open = false;
         this.state = true;
         this.message = '';
@@ -32,7 +33,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.openRegisterSubscription = this.userSerivce.openRegisterEvent.subscribe((value: boolean) => this.open = value);
+        this.openRegisterSubscription = this.userService.openRegisterEvent.subscribe((value: boolean) => this.open = value);
         this.basicForm = new FormGroup({
             'businessName': new FormControl(null, [Validators.required, Validators.pattern('^(?![0-9.,])[a-z0-9\\s.,]+$')]),
             'rif': new FormGroup({
@@ -72,10 +73,10 @@ export class RegisterComponent implements OnInit, OnDestroy {
             'email': this.signinForm.value.email,
             'password': this.signinForm.value.password.newPassword
         };
-        this.userSerivce.clientLogin(client).subscribe(
+        this.userService.clientLogin(client).subscribe(
             value => {
-                localStorage.setItem('user', JSON.stringify(value.user));
-                localStorage.setItem('token', value.token);
+                this.userService.setUser(value.user);
+                this.authService.setToken(value.token);
                 this.appAlertService.alertEvent.next({
                     'state': eval('false'),
                     'type': 'success',
@@ -139,7 +140,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
             'ownerName': []
         };
         this.contactForm.value.ownerName.forEach(value => client.ownerName.push([value.firstname, value.lastname].join(' ')));
-        this.userSerivce.addClient(client).subscribe(
+        this.userService.addClient(client).subscribe(
             value => {
                 this.state = false;
                 this.type = 'success';
@@ -149,12 +150,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
             err => {
                 this.state = false;
                 this.type = 'danger';
-                this.message = `¡Ha habido un problema! ${err.error.payload.message}`;
+                this.message = `¡Ha ocurrido un problema! ${err.error.payload.message}`;
             }
         )
-    }
-
-    onReturn() {
-
     }
 }

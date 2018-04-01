@@ -22,6 +22,9 @@ import { LoginComponent } from './components/login/login.component';
 import { AppAlertComponent } from './components/app-alert/app-alert.component';
 import {AppAlertService} from "./services/app-alert.service";
 import { RegisterComponent } from './components/register/register.component';
+import {AuthService} from "./services/auth.service";
+import { ClientPanelComponent } from './components/client-panel/client-panel.component';
+import { EmployeePanelComponent } from './components/employee-panel/employee-panel.component';
 
 
 @NgModule({
@@ -38,6 +41,8 @@ import { RegisterComponent } from './components/register/register.component';
         LoginComponent,
         AppAlertComponent,
         RegisterComponent,
+        ClientPanelComponent,
+        EmployeePanelComponent,
     ],
     imports: [
         BrowserModule,
@@ -50,7 +55,8 @@ import { RegisterComponent } from './components/register/register.component';
     providers: [
         ProductsService,
         UserService,
-        AppAlertService
+        AppAlertService,
+        AuthService,
     ],
     bootstrap: [AppComponent]
 })
