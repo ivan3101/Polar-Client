@@ -20,4 +20,8 @@ export class OrdersService {
         return this.httpClient.get(`${this.url}/clients`, options);
     }
 
+    cancelOrder(id) {
+        return this.httpClient.put(`${this.url}/${id}`, {});
+    }
+
 }

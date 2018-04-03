@@ -2,32 +2,33 @@
   <h3 class="modal-title">Carrito</h3>
   <div class="modal-body">
     <p *ngIf="!products || !products.length; else table">No ha agregado productos al carrito</p>
-    <ng-template #table><clr-datagrid [(clrDgSelected)]="selected" [clDgRowSelection]="true">
-      <clr-dg-action-bar>
-        <div class="btn-group">
-          <button type="button" class="btn btn-sm btn-secondary" (click)="onDelete()" [disabled]="!selected || !selected?.length" style="color: #C92100;">
-            <clr-icon shape="close"></clr-icon> Delete
-          </button>
-        </div>
-      </clr-dg-action-bar>
+    <ng-template #table>
+      <clr-datagrid [(clrDgSelected)]="selected" [clDgRowSelection]="true">
+        <clr-dg-action-bar>
+          <div class="btn-group">
+            <button type="button" class="btn btn-sm btn-secondary" (click)="onDelete()" [disabled]="!selected || !selected?.length" style="color: #C92100;">
+              <clr-icon shape="close"></clr-icon> Delete
+            </button>
+          </div>
+        </clr-dg-action-bar>
 
-      <clr-dg-column>Nombre</clr-dg-column>
-      <clr-dg-column>Precio</clr-dg-column>
-      <clr-dg-column>Cantidad</clr-dg-column>
+        <clr-dg-column>Nombre</clr-dg-column>
+        <clr-dg-column>Precio</clr-dg-column>
+        <clr-dg-column>Cantidad</clr-dg-column>
 
-      <clr-dg-row *clrDgItems="let product of products" [clrDgItem]="product">
-        <clr-dg-cell>{{product.name}}</clr-dg-cell>
-        <clr-dg-cell>{{product.price}}</clr-dg-cell>
-        <clr-dg-cell>{{product.total}}</clr-dg-cell>
-      </clr-dg-row>
+        <clr-dg-row *clrDgItems="let product of products" [clrDgItem]="product">
+          <clr-dg-cell>{{product.name}}</clr-dg-cell>
+          <clr-dg-cell>{{product.price}}</clr-dg-cell>
+          <clr-dg-cell>{{product.total}}</clr-dg-cell>
+        </clr-dg-row>
 
-      <clr-dg-footer>
-        <clr-dg-pagination #pagination [clrDgPageSize]="5">
-          {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
-          de {{pagination.totalItems}} productos
-        </clr-dg-pagination>
-      </clr-dg-footer>
-    </clr-datagrid>
+        <clr-dg-footer>
+          <clr-dg-pagination #pagination [clrDgPageSize]="5">
+            {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+            de {{pagination.totalItems}} productos
+          </clr-dg-pagination>
+        </clr-dg-footer>
+      </clr-datagrid>
 
     </ng-template>
   </div>

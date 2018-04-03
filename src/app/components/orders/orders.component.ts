@@ -32,4 +32,16 @@ export class OrdersComponent implements OnInit {
         }
     }
 
+    onDelete(id) {
+        this.ordersService.cancelOrder(id).subscribe(() => {
+            this.updateOrders();
+        });
+    }
+
+    updateOrders() {
+        this.ordersPending = this.ordersService.getOrdersByUser('En espera');
+        this.ordersFinished = this.ordersService.getOrdersByUser('Cancelado');
+        this.ordersCanceled = this.ordersService.getOrdersByUser('Entregado');
+    }
+
 }

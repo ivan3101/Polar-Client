@@ -11,17 +11,18 @@
 <div class="row">
     <div class="col-xs-12 col-md-6 offset-md-3">
         <clr-datagrid>
-            <clr-dg-column>Productos</clr-dg-column>
+            <clr-dg-column>Comprador</clr-dg-column>
             <clr-dg-column>Precio total</clr-dg-column>
-            <clr-dg-column>Dirección de envio</clr-dg-column>
             <clr-dg-column>Estado</clr-dg-column>
 
             <clr-dg-placeholder>No se han encontrado pedidos en espera</clr-dg-placeholder>
 
-            <clr-dg-row *ngFor="let order of ordersPending | async" [clrDgItem]="order">
-                <clr-dg-cell>Ver productos</clr-dg-cell>
+            <clr-dg-row *clrDgItems="let order of ordersPending | async" [clrDgItem]="order">
+                <clr-dg-action-overflow>
+                    <button class="action-item" (click)="onDelete(order._id)">Cancelar</button>
+                </clr-dg-action-overflow>
+                <clr-dg-cell>{{order.buyer.businessName}}</clr-dg-cell>
                 <clr-dg-cell>{{order.totalPrice}}</clr-dg-cell>
-                <clr-dg-cell>Ver dirección</clr-dg-cell>
                 <clr-dg-cell>{{order.status}}</clr-dg-cell>
             </clr-dg-row>
 
@@ -42,17 +43,15 @@
 <div class="row">
     <div class="col-xs-12 col-md-6 offset-md-3">
         <clr-datagrid>
-            <clr-dg-column>Productos</clr-dg-column>
+            <clr-dg-column>Comprador</clr-dg-column>
             <clr-dg-column>Precio total</clr-dg-column>
-            <clr-dg-column>Dirección de envio</clr-dg-column>
             <clr-dg-column>Estado</clr-dg-column>
 
             <clr-dg-placeholder>No se han encontrado pedidos entregados</clr-dg-placeholder>
 
-            <clr-dg-row *ngFor="let order of ordersFinished | async" [clrDgItem]="order">
-                <clr-dg-cell>Ver productos</clr-dg-cell>
+            <clr-dg-row *clrDgItems="let order of ordersFinished | async" [clrDgItem]="order">
+                <clr-dg-cell>{{order.buyer.businessName}}</clr-dg-cell>
                 <clr-dg-cell>{{order.totalPrice}}</clr-dg-cell>
-                <clr-dg-cell>Ver dirección</clr-dg-cell>
                 <clr-dg-cell>{{order.status}}</clr-dg-cell>
             </clr-dg-row>
 
@@ -73,17 +72,15 @@
 <div class="row">
     <div class="col-xs-12 col-md-6 offset-md-3">
         <clr-datagrid>
-            <clr-dg-column>Productos</clr-dg-column>
+            <clr-dg-column>Comprador</clr-dg-column>
             <clr-dg-column>Precio total</clr-dg-column>
-            <clr-dg-column>Dirección de envio</clr-dg-column>
             <clr-dg-column>Estado</clr-dg-column>
 
             <clr-dg-placeholder>No se han encontrado pedidos cancelados</clr-dg-placeholder>
 
-            <clr-dg-row *ngFor="let order of ordersCanceled | async" [clrDgItem]="order">
-                <clr-dg-cell>Ver productos</clr-dg-cell>
+            <clr-dg-row *clrDgItems="let order of ordersCanceled | async">
+                <clr-dg-cell>{{order.buyer.businessName}}</clr-dg-cell>
                 <clr-dg-cell>{{order.totalPrice}}</clr-dg-cell>
-                <clr-dg-cell>Ver dirección</clr-dg-cell>
                 <clr-dg-cell>{{order.status}}</clr-dg-cell>
             </clr-dg-row>
 
@@ -98,18 +95,4 @@
 </div>
 
 
-<div class="row">
-  <div class="col-sm-1" style="border: 1px solid red;"></div>
-  <div class="col-sm-1" style="border: 1px solid blue"></div>
-  <div class="col-sm-1" style="border: 1px solid red;"></div>
-  <div class="col-sm-1" style="border: 1px solid blue"></div>
-  <div class="col-sm-1" style="border: 1px solid red;"></div>
-  <div class="col-sm-1" style="border: 1px solid blue"></div>
-  <div class="col-sm-1" style="border: 1px solid red;"></div>
-  <div class="col-sm-1" style="border: 1px solid blue"></div>
-  <div class="col-sm-1" style="border: 1px solid red;"></div>
-  <div class="col-sm-1" style="border: 1px solid blue"></div>
-  <div class="col-sm-1" style="border: 1px solid red;"></div>
-  <div class="col-sm-1" style="border: 1px solid blue"></div>
-</div>
 

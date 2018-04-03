@@ -77,7 +77,9 @@ export class PayComponent implements OnInit, OnDestroy {
                     {'stock': (product.stock - product.total).toString()}).subscribe(value => {});
             setTimeout(() => {
                 localStorage.removeItem('cart');
-                this.appAlertSerice.alertEvent.next({'state': eval('false'), 'type': 'success', 'message': 'La compra se ha realizado correctamente'});
+                this.appAlertSerice.alertEvent.next(
+                    {'state': eval('false'),
+                        'type': 'success', 'message': 'La compra se ha realizado correctamente'});
                 this.router.navigate(['/products/all']);
             }, 400);
         });

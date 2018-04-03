@@ -32,6 +32,7 @@ import { OrdersComponent } from './components/orders/orders.component';
 import {OrdersService} from './services/orders.service';
 import { PayComponent } from './components/pay/pay.component';
 import { AddCardComponent } from './components/add-card/add-card.component';
+import { DetailsModalComponent } from './components/details-modal/details-modal.component';
 
 
 @NgModule({
@@ -54,6 +55,7 @@ import { AddCardComponent } from './components/add-card/add-card.component';
         OrdersComponent,
         PayComponent,
         AddCardComponent,
+        DetailsModalComponent,
     ],
     imports: [
         BrowserModule,
