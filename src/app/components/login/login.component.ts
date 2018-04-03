@@ -52,6 +52,7 @@ export class LoginComponent implements OnInit, OnDestroy {
                         'type': 'success',
                         'message': 'Se inicio sesión correctamente'
                     });
+                    this.userService.sessionEvent.next(true);
                     this.open = false;
                 },
                 err => {
@@ -70,6 +71,7 @@ export class LoginComponent implements OnInit, OnDestroy {
                         'type': 'success',
                         'message': 'Se inicio sesión correctamente'
                     });
+                    this.userService.sessionEvent.next(true);
                     this.open = false;
                 },
                 err => {

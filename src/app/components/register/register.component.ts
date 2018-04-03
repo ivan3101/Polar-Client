@@ -23,7 +23,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     @ViewChild('wizard') wizard;
     @ViewChild('lastPage') lastPage;
     openRegisterSubscription: Subscription;
-    constructor(private userService: UserService, private appAlertService: AppAlertService, private authSerive: AuthService) {
+    constructor(private userService: UserService, private appAlertService: AppAlertService, private authService: AuthService) {
         this.open = false;
         this.state = true;
         this.message = '';
@@ -82,6 +82,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
                     'type': 'success',
                     'message': 'Se inicio sesión correctamente'
                 });
+                this.userService.sessionEvent.next(true);
             },
             err => {
                 this.appAlertService.alertEvent.next({

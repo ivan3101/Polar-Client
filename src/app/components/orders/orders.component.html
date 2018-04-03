@@ -1,0 +1,115 @@
+<div class="row">
+    <div class="offset-md-2">
+        <h2>Mis pedidos</h2>
+    </div>
+</div>
+<div class="row">
+    <div class="offset-md-3">
+        <h3>Pedidos en espera</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-md-6 offset-md-3">
+        <clr-datagrid>
+            <clr-dg-column>Productos</clr-dg-column>
+            <clr-dg-column>Precio total</clr-dg-column>
+            <clr-dg-column>Dirección de envio</clr-dg-column>
+            <clr-dg-column>Estado</clr-dg-column>
+
+            <clr-dg-placeholder>No se han encontrado pedidos en espera</clr-dg-placeholder>
+
+            <clr-dg-row *ngFor="let order of ordersPending | async" [clrDgItem]="order">
+                <clr-dg-cell>Ver productos</clr-dg-cell>
+                <clr-dg-cell>{{order.totalPrice}}</clr-dg-cell>
+                <clr-dg-cell>Ver dirección</clr-dg-cell>
+                <clr-dg-cell>{{order.status}}</clr-dg-cell>
+            </clr-dg-row>
+
+            <clr-dg-footer>
+                <clr-dg-pagination #pagination [clrDgPageSize]="5">
+                    {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+                    de {{pagination.totalItems}} pedidos
+                </clr-dg-pagination>
+            </clr-dg-footer>
+        </clr-datagrid>
+    </div>
+</div>
+<div class="row">
+    <div class="offset-md-3">
+        <h3>Pedidos entregados</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-md-6 offset-md-3">
+        <clr-datagrid>
+            <clr-dg-column>Productos</clr-dg-column>
+            <clr-dg-column>Precio total</clr-dg-column>
+            <clr-dg-column>Dirección de envio</clr-dg-column>
+            <clr-dg-column>Estado</clr-dg-column>
+
+            <clr-dg-placeholder>No se han encontrado pedidos entregados</clr-dg-placeholder>
+
+            <clr-dg-row *ngFor="let order of ordersFinished | async" [clrDgItem]="order">
+                <clr-dg-cell>Ver productos</clr-dg-cell>
+                <clr-dg-cell>{{order.totalPrice}}</clr-dg-cell>
+                <clr-dg-cell>Ver dirección</clr-dg-cell>
+                <clr-dg-cell>{{order.status}}</clr-dg-cell>
+            </clr-dg-row>
+
+            <clr-dg-footer>
+                <clr-dg-pagination #pagination [clrDgPageSize]="5">
+                    {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+                    de {{pagination.totalItems}} pedidos
+                </clr-dg-pagination>
+            </clr-dg-footer>
+        </clr-datagrid>
+    </div>
+</div>
+<div class="row">
+    <div class="offset-md-3">
+        <h3>Pedidos cancelados</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-md-6 offset-md-3">
+        <clr-datagrid>
+            <clr-dg-column>Productos</clr-dg-column>
+            <clr-dg-column>Precio total</clr-dg-column>
+            <clr-dg-column>Dirección de envio</clr-dg-column>
+            <clr-dg-column>Estado</clr-dg-column>
+
+            <clr-dg-placeholder>No se han encontrado pedidos cancelados</clr-dg-placeholder>
+
+            <clr-dg-row *ngFor="let order of ordersCanceled | async" [clrDgItem]="order">
+                <clr-dg-cell>Ver productos</clr-dg-cell>
+                <clr-dg-cell>{{order.totalPrice}}</clr-dg-cell>
+                <clr-dg-cell>Ver dirección</clr-dg-cell>
+                <clr-dg-cell>{{order.status}}</clr-dg-cell>
+            </clr-dg-row>
+
+            <clr-dg-footer>
+                <clr-dg-pagination #pagination [clrDgPageSize]="5">
+                    {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+                    de {{pagination.totalItems}} pedidos
+                </clr-dg-pagination>
+            </clr-dg-footer>
+        </clr-datagrid>
+    </div>
+</div>
+
+
+<div class="row">
+  <div class="col-sm-1" style="border: 1px solid red;"></div>
+  <div class="col-sm-1" style="border: 1px solid blue"></div>
+  <div class="col-sm-1" style="border: 1px solid red;"></div>
+  <div class="col-sm-1" style="border: 1px solid blue"></div>
+  <div class="col-sm-1" style="border: 1px solid red;"></div>
+  <div class="col-sm-1" style="border: 1px solid blue"></div>
+  <div class="col-sm-1" style="border: 1px solid red;"></div>
+  <div class="col-sm-1" style="border: 1px solid blue"></div>
+  <div class="col-sm-1" style="border: 1px solid red;"></div>
+  <div class="col-sm-1" style="border: 1px solid blue"></div>
+  <div class="col-sm-1" style="border: 1px solid red;"></div>
+  <div class="col-sm-1" style="border: 1px solid blue"></div>
+</div>
+

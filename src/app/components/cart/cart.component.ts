@@ -1,6 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ProductsService} from "../../services/products.service";
 import {Subscription} from "rxjs/Subscription";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-cart',
@@ -13,7 +14,7 @@ export class CartComponent implements OnInit, OnDestroy {
   selected = [];
   openCartSubscription: Subscription;
   updateCartSubscription: Subscription;
-  constructor(private productsService: ProductsService) {
+  constructor(private productsService: ProductsService, private router: Router) {
     this.products = JSON.parse(localStorage.getItem('cart'));
     this.open = false;
   }
@@ -35,6 +36,11 @@ export class CartComponent implements OnInit, OnDestroy {
     localStorage.setItem('cart', JSON.stringify(this.products));
     this.productsService.updateCartEvent.next(true);
     this.selected = [];
+  }
+
+  onPay() {
+    this.open = false;
+    this.router.navigate(['pay']);
   }
 
 }

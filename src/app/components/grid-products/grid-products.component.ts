@@ -3,52 +3,81 @@ import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {ProductsService} from "../../services/products.service";
 import {Product} from "../../models/product.model";
 import {Subscription} from "rxjs/Subscription";
+import {AbstractControl, FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
-  selector: 'app-grid-products',
-  templateUrl: './grid-products.component.html',
-  styleUrls: ['./grid-products.component.css']
+    selector: 'app-grid-products',
+    templateUrl: './grid-products.component.html',
+    styleUrls: ['./grid-products.component.css']
 })
 export class GridProductsComponent implements OnInit, OnDestroy {
-  products;
-  cart;
-  updateCartSubscription: Subscription;
-  constructor(private route: ActivatedRoute, private router: Router, private productsService: ProductsService) {
-      this.cart = JSON.parse(localStorage.getItem('cart')) || [];
-  }
+    products;
+    product;
+    cart;
+    open: boolean;
+    addForm: FormGroup;
+    updateCartSubscription: Subscription;
+    constructor(private route: ActivatedRoute, private router: Router, private productsService: ProductsService) {
+        this.cart = JSON.parse(localStorage.getItem('cart')) || [];
+        this.open = false;
+        this.product = null;
+    }
 
-  ngOnInit() {
-      if(this.router.url.split('/')[2] === '/products/all'.split('/')[2]) {
-          this.products = this.productsService.getAllProducts();
-      } else if(this.router.url.split('/')[2] === '/products/brand/'.split('/')[2]) {
-          this.route.paramMap.subscribe((params: ParamMap) => this.products = this.productsService.getAllProducts(undefined, undefined, params.get('brand')));
-      } else if(this.router.url.split('/')[2] === '/products/unavailable'.split('/')[2]) {
-          this.products = this.productsService.getAllProducts(undefined, undefined, undefined, false)
-      }
-      this.updateCartSubscription = this.productsService.updateCartEvent.subscribe((value: boolean) => this.cart = JSON.parse(localStorage.getItem('cart')) || []);
-  }
+    ngOnInit() {
+        if(this.router.url.split('/')[2] === '/products/all'.split('/')[2]) {
+            this.products = this.productsService.getAllProducts();
+        } else if(this.router.url.split('/')[2] === '/products/brand/'.split('/')[2]) {
+            this.route.paramMap.subscribe((params: ParamMap) => this.products = this.productsService.getAllProducts(undefined, undefined, params.get('brand')));
+        } else if(this.router.url.split('/')[2] === '/products/unavailable'.split('/')[2]) {
+            this.products = this.productsService.getAllProducts(undefined, undefined, undefined, false)
+        }
+        this.updateCartSubscription = this.productsService.updateCartEvent.subscribe((value: boolean) => this.cart = JSON.parse(localStorage.getItem('cart')) || []);
+        this.addForm = new FormGroup({
+            'name': new FormControl({value: null, disabled: true}, [Validators.required]),
+            'stock': new FormControl(null, [Validators.required])
+        });
+    }
 
-  ngOnDestroy() {
-      this.updateCartSubscription.unsubscribe();
-  }
+    ngOnDestroy() {
+        this.updateCartSubscription.unsubscribe();
+    }
 
-  onAddToCart(product: Product) {
-      this.cart = JSON.parse(localStorage.getItem('cart')) || [];
-      this.cart.push(product);
-      localStorage.setItem('cart', JSON.stringify(this.cart));
-      this.productsService.updateCartEvent.next(true);
-  }
+    onAddToCart() {
+        this.cart = JSON.parse(localStorage.getItem('cart')) || [];
+        this.product.total = this.addForm.value.stock;
+        this.cart.push(this.product);
+        localStorage.setItem('cart', JSON.stringify(this.cart));
+        this.productsService.updateCartEvent.next(true);
+        this.addForm.reset();
+        this.open = false;
+    }
 
-  onRemoveFromCart(index: number) {
-    this.cart = JSON.parse(localStorage.getItem('cart'));
-    this.cart.splice(index, 1);
-    localStorage.setItem('cart', JSON.stringify(this.cart));
-    this.productsService.updateCartEvent.next(true);
-  }
+    onRemoveFromCart(index: number) {
+        this.cart = JSON.parse(localStorage.getItem('cart'));
+        this.cart.splice(index, 1);
+        localStorage.setItem('cart', JSON.stringify(this.cart));
+        this.productsService.updateCartEvent.next(true);
+    }
 
-  check(product: Product) {
-      return !this.cart.find(elem => elem._id === product._id);
-  }
+    check(product: Product) {
+        return !this.cart.find(elem => elem._id === product._id);
+    }
 
+    onAdd(product) {
+        this.product = product;
+        this.addForm.get('name').patchValue(this.product.name);
+        this.addForm.get('stock').setValidators(this.checkQuantity(this.product.stock));
+        this.open = true;
+    }
+
+    checkQuantity(stock) {
+        return (formControl: AbstractControl) => {
+            if (formControl.value <= stock) {
+                return null;
+            } else {
+                return {checkQuantity: true};
+            }
+        }
+    }
 
 }

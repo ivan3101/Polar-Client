@@ -1,0 +1,156 @@
+<clr-wizard #wizard [(clrWizardOpen)]="open" clrWizardSize="lg" [clrWizardDisableStepnav]="added" [clrWizardForceForwardNavigation]="true">
+  <clr-wizard-title>Medium-Sized Wizard</clr-wizard-title>
+
+  <clr-wizard-button [type]="'cancel'">Cancelar</clr-wizard-button>
+  <clr-wizard-button [type]="'previous'">Regresar</clr-wizard-button>
+  <clr-wizard-button [type]="'next'">Siguiente</clr-wizard-button>
+  <clr-wizard-button [type]="'finish'">Finalizar</clr-wizard-button>
+
+  <clr-wizard-page [clrWizardPageNextDisabled]="!cardForm.valid">
+    <ng-template clrPageTitle>Datos de la tarjeta</ng-template>
+    <form [formGroup]="cardForm">
+      <section class="form-block">
+        <div class="form-group row">
+          <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+            <label for="cardNumber" class="required">Numero de tarjeta</label>
+          </div>
+          <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+            <label for="cardNumber" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-left tooltip-sm form-control"
+                   [class.invalid]="cardForm.get('cardNumber').invalid
+                    && (cardForm.get('cardNumber').dirty || cardForm.get('cardNumber').touched)">
+              <input type="text" id="cardNumber" placeholder="1234567898765432" formControlName="cardNumber" class="form-control">
+              <span class="tooltip-content" *ngIf="cardForm.get('cardNumber').errors && (cardForm.get('cardNumber').errors.required && (cardForm.get('cardNumber').dirty || cardForm.get('cardNumber').touched))">
+                                Debe ingresar el numero de la tarjeta
+                            </span>
+              <span class="tooltip-content" *ngIf="cardForm.get('cardNumber').errors && (cardForm.get('cardNumber').errors.checkCardNumber && (cardForm.get('cardNumber').dirty || cardForm.get('cardNumber').touched))">
+                                Debe ingresar un numero de tarjeta valido
+                            </span>
+            </label>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+            <label for="cvv" class="required">Codigo de Verificación</label>
+          </div>
+          <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+            <label for="cvv" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-left tooltip-sm form-control"
+                   [class.invalid]="cardForm.get('cvv').invalid
+                    && (cardForm.get('cvv').dirty || cardForm.get('cvv').touched)">
+              <input type="text" id="cvv" placeholder="123" formControlName="cvv" class="form-control">
+              <span class="tooltip-content" *ngIf="cardForm.get('cvv').errors && (cardForm.get('cvv').errors.required && (cardForm.get('cvv').dirty || cardForm.get('cvv').touched))">
+                                Debe ingresar el codigo de verificación
+                            </span>
+              <span class="tooltip-content" *ngIf="cardForm.get('cvv').errors && (cardForm.get('cvv').errors.checkCvv && (cardForm.get('cvv').dirty || cardForm.get('cvv').touched))">
+                                Debe ingresar un codigo de verificación valido
+                            </span>
+            </label>
+          </div>
+        </div>
+        <div class="form-group row" formGroupName="expDate">
+          <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+            <label for="cardNumber" class="required">Fecha de Vencimiento</label>
+          </div>
+          <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+            <div class="select">
+              <select name="month" id="month" formControlName="month">
+                <option value="01">01</option>
+                <option value="02">02</option>
+                <option value="03">03</option>
+                <option value="04">04</option>
+                <option value="05">05</option>
+                <option value="06">06</option>
+                <option value="07">07</option>
+                <option value="08">08</option>
+                <option value="09">09</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+            <div class="select">
+              <select name="year" id="year" formControlName="year">
+                <option [value]="year" *ngFor="let year of years">{{ year }}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </section>
+    </form>
+  </clr-wizard-page>
+
+  <clr-wizard-page [clrWizardPageNextDisabled]="!cardholderForm.valid" (clrWizardPageCustomButton)="doCustomClick($event)">
+    <ng-template clrPageTitle>Datos del tarjetahabiente</ng-template>
+    <form [formGroup]="cardholderForm">
+      <section class="form-block">
+        <div class="form-group row">
+          <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+            <label for="cardholderName" class="required">Nombre del tarjetahabiente</label>
+          </div>
+          <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+            <label for="cardholderName" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-left tooltip-sm form-control"
+                   [class.invalid]="cardholderForm.get('cardholderName').invalid
+                    && (cardholderForm.get('cardholderName').dirty || cardholderForm.get('cardholderName').touched)">
+              <input type="text" id="cardholderName" placeholder="John Smith" formControlName="cardholderName" class="form-control">
+              <span class="tooltip-content" *ngIf="cardholderForm.get('cardholderName').errors && (cardholderForm.get('cardholderName').errors.required && (cardholderForm.get('cardholderName').dirty || cardholderForm.get('cardholderName').touched))">
+                                Debe ingresar el nombre
+                            </span>
+              <span class="tooltip-content" *ngIf="cardholderForm.get('cardholderName').errors && (cardholderForm.get('cardholderName').errors.pattern && (cardholderForm.get('cardholderName').dirty || cardholderForm.get('cardholderName').touched))">
+                                Debe ingresar un nombre valido
+                            </span>
+            </label>
+          </div>
+        </div>
+        <div class="form-group row" formGroupName="cedula">
+          <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+            <label for="letter" class="required">Cedula del tarjetahabiente</label>
+          </div>
+          <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+            <div class="select">
+              <select name="letter" id="letter" formControlName="letter">
+                <option value="e">E</option>
+                <option value="g">G</option>
+                <option value="j">J</option>
+                <option value="p">P</option>
+                <option value="v">V</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+            <label for="number" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-left tooltip-sm form-control"
+                   [class.invalid]="cardholderForm.get('cedula.number').invalid
+                    && (cardholderForm.get('cedula.number').dirty || cardholderForm.get('cedula.number').touched)">
+              <input type="text" id="number" placeholder="12345678" formControlName="number" class="form-control">
+              <span class="tooltip-content" *ngIf="cardholderForm.get('cedula.number').errors && (cardholderForm.get('cedula.number').errors.required && (cardholderForm.get('cedula.number').dirty || cardholderForm.get('cedula.number').touched))">
+                                Debe ingresar la cedula
+                            </span>
+              <span class="tooltip-content" *ngIf="cardholderForm.get('cedula.number').errors && (cardholderForm.get('cedula.number').errors.pattern && (cardholderForm.get('cedula.number').dirty || cardholderForm.get('cedula.number').touched))">
+                                Debe ingresar una cedula valida
+                            </span>
+            </label>
+          </div>
+        </div>
+      </section>
+    </form>
+    <ng-template clrPageButtons>
+      <clr-wizard-button [type]="'previous'">Regresar</clr-wizard-button>
+      <clr-wizard-button [type]="'custom-next'">Agregar</clr-wizard-button>
+    </ng-template>
+  </clr-wizard-page>
+
+  <clr-wizard-page>
+    <ng-template clrPageTitle>Finalizar</ng-template>
+    <clr-alert [clrAlertType]="type" [clrAlertClosable]="false" [(clrAlertClosed)]="state">
+      <div clr-alert-item class="alert-item">
+        <span class="alert-text">
+            {{ message }}
+        </span>
+      </div>
+    </clr-alert>
+    <ng-template clrPageButtons>
+      <clr-wizard-button [type]="'previous'" *ngIf="!added">Regresar</clr-wizard-button>
+      <clr-wizard-button [type]="'custom-finish'" *ngIf="added">Finalizar</clr-wizard-button>
+    </ng-template>
+  </clr-wizard-page>
+</clr-wizard>

@@ -6,6 +6,9 @@
     <a routerLink="/products" routerLinkActive="active" class="nav-link nav-text">Productos</a>
     <a routerLink="/about-us" routerLinkActive="active" class="nav-link nav-text">Sobre nosotros</a>
     <a routerLink="/contact-us" routerLinkActive="active" class="nav-link nav-text">Contactanos</a>
+    <a [routerLink]="['/adm', type, id, 'orders']" routerLinkActive="active" class="nav-link nav-text" *ngIf="innerWidth <= 768 && session">Pedidos</a>
+    <a [routerLink]="['/adm', type, id, 'profile']" routerLinkActive="active" class="nav-link nav-text" *ngIf="innerWidth <= 768 && session">Perfil</a>
+    <a routerLinkActive="active" class="nav-link nav-text" *ngIf="innerWidth <= 768 && session" (click)="onLogout()">Cerrar Sesión</a>
   </div>
   <div class="header-actions">
     <div *ngIf="innerWidth > 768; else mobile">
@@ -13,17 +16,28 @@
         <clr-icon shape="shopping-cart" class="is-solid"></clr-icon>
         Carrito
       </button>
-      <button class="btn btn-icon btn-link" style="color: #F4F1E6;" (click)="onOpenUser()">
+      <button class="btn btn-icon btn-link" style="color: #F4F1E6;" (click)="onOpenUser()" *ngIf="!session">
         <clr-icon shape="user" class="is-solid"></clr-icon>
         Identificarse
       </button>
+      <clr-dropdown *ngIf="session">
+        <button class="btn btn-icon btn-link" style="color: #F4F1E6;" clrDropdownTrigger>
+          <clr-icon shape="user" class="is-solid"></clr-icon>
+          Mi Cuenta
+          <clr-icon shape="caret down"></clr-icon>
+        </button>
+        <clr-dropdown-menu [clrPosition]="'bottom-right'" *clrIfOpen>
+          <button type="button" clrDropdownItem (click)="onRedirecToOrders()">Pedidos</button>
+          <button type="button" clrDropdownItem (click)="onRedirecToProfile()">Perfil</button>
+          <button type="button" clrDropdownItem (click)="onLogout()">Cerrar Sesión</button>
+        </clr-dropdown-menu>
+      </clr-dropdown>
     </div>
-
     <ng-template #mobile>
       <a class="nav-link nav-icon" style="color: #F4F1E6;" (click)="onOpenCart()">
         <clr-icon shape="shopping-cart" class="is-solid"></clr-icon>
       </a>
-      <a class="nav-link nav-icon" style="color: #F4F1E6;" (click)="onOpenUser()">
+      <a class="nav-link nav-icon" style="color: #F4F1E6;" (click)="onOpenUser()" *ngIf="!session">
         <clr-icon shape="user" class="is-solid"></clr-icon>
       </a>
     </ng-template>
