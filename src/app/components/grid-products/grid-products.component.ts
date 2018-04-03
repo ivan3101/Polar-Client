@@ -22,7 +22,6 @@ export class GridProductsComponent implements OnInit, OnDestroy {
     session: Subscription;
     stockUpdated: Subscription;
     constructor(private route: ActivatedRoute, private router: Router, private productsService: ProductsService, private userService: UserService) {
-        this.selected = null;
         this.type = null;
         this.cart = JSON.parse(localStorage.getItem('cart')) || [];
         this.open = false;

@@ -75,6 +75,7 @@ export class PayComponent implements OnInit, OnDestroy {
             JSON.parse(localStorage.getItem('cart')).forEach(product => {
                 this.productsService.updateProduct(product._id,
                     {'stock': (product.stock - product.total).toString()}).subscribe(value => {});
+            });
             setTimeout(() => {
                 localStorage.removeItem('cart');
                 this.appAlertSerice.alertEvent.next(
