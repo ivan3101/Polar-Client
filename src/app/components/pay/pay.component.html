@@ -1,53 +1,71 @@
 <div class="content-area">
-  <div class="row">
-    <div class="col-xs-12 col-lg-6 offset-lg-3">
-      <h2>Productos a pagar</h2>
+    <div class="row">
+        <div class="col-xs-12 col-lg-6 offset-lg-3">
+            <h2>Productos a pagar</h2>
+        </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12 col-lg-6 offset-lg-3">
-      <clr-datagrid [(clrDgSelected)]="selected" [clDgRowSelection]="true">
-        <clr-dg-action-bar>
-          <div class="btn-group">
-            <button type="button" class="btn btn-sm btn-secondary" (click)="onDelete()" [disabled]="!selected || !selected?.length" style="color: #C92100;">
-              <clr-icon shape="close"></clr-icon> Delete
-            </button>
-          </div>
-        </clr-dg-action-bar>
+    <div class="row">
+        <div class="col-xs-12 col-lg-6 offset-lg-3">
+            <clr-datagrid [(clrDgSelected)]="selected" [clDgRowSelection]="true">
+                <clr-dg-action-bar>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-secondary" (click)="onDelete()" [disabled]="!selected || !selected?.length" style="color: #C92100;">
+                            <clr-icon shape="close"></clr-icon> Delete
+                        </button>
+                    </div>
+                </clr-dg-action-bar>
 
-        <clr-dg-column>Nombre</clr-dg-column>
-        <clr-dg-column>Precio</clr-dg-column>
-        <clr-dg-column>Cantidad</clr-dg-column>
+                <clr-dg-column>Nombre</clr-dg-column>
+                <clr-dg-column>Precio</clr-dg-column>
+                <clr-dg-column>Cantidad</clr-dg-column>
 
-        <clr-dg-row *clrDgItems="let product of products" [clrDgItem]="product">
-          <clr-dg-cell>{{product.name}}</clr-dg-cell>
-          <clr-dg-cell>{{product.price}}</clr-dg-cell>
-          <clr-dg-cell>{{product.total}}</clr-dg-cell>
-        </clr-dg-row>
+                <clr-dg-row *clrDgItems="let product of products" [clrDgItem]="product">
+                    <clr-dg-cell>{{product.name}}</clr-dg-cell>
+                    <clr-dg-cell>{{product.price}}</clr-dg-cell>
+                    <clr-dg-cell>{{product.total}}</clr-dg-cell>
+                </clr-dg-row>
 
-        <clr-dg-footer>
-          <clr-dg-pagination #pagination [clrDgPageSize]="5">
-            {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
-            de {{pagination.totalItems}} productos
-          </clr-dg-pagination>
-        </clr-dg-footer>
-      </clr-datagrid>
+                <clr-dg-footer>
+                    <clr-dg-pagination #pagination [clrDgPageSize]="5">
+                        {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+                        de {{pagination.totalItems}} productos
+                    </clr-dg-pagination>
+                </clr-dg-footer>
+            </clr-datagrid>
+        </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12 col-lg-6 offset-lg-3">
-      <h2>Metodos de pago</h2>
-      <button class="btn btn-outline" (click)="onOpenWizard()">Agregar forma de pago</button>
+    <div class="row">
+        <div class="col-xs-12 col-lg-6 offset-lg-3">
+            <h2>Metodos de pago</h2>
+            <button class="btn btn-outline" (click)="onOpenWizard()">Agregar forma de pago</button>
+        </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12 col-lg-2" *ngFor="let card of cards?.payMethod; let i=index" [ngClass]="{'offset-lg-3': i % 3 === 0}">
-      holis
+    <div class="row">
+        <div class="col-xs-12 col-lg-2" *ngFor="let card of cards | async; let i=index" [ngClass]="{'offset-lg-3': i % 3 === 0}">
+            <div class="card" [ngClass]="{'selected': cardSelected === card._id}">
+                <div class="card-header">
+                    Metodo de pago {{ i + 1 }}
+                </div>
+                <div class="card-block">
+                    <div class="card-text">
+                        <ul>
+                            <li>Numero de tarjeta: XXXXX{{ card.cardNumber.substring(0, card.cardNumber.length - 10) }}</li>
+                            <li>Nombre del tarjetahabiente: {{ card.cardholderName }}</li>
+                            <li>Fecha de vencimiento: {{ card.expDate | date }}</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-sm btn-link" (click)="cardSelected = card._id">Seleccionar</button>
+                    <button class="btn btn-sm btn-link" (click)="onDeleteCard(card._id)">Borrar</button>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col-xs12 col-lg-6 offset-lg-3" *ngIf="!cards?.length">
-      <h3>No hay ninguna forma de pago agregada</h3>
+    <div class="row">
+        <div class="col-xs-12 col-lg-3 offset-lg-3">
+            <button class="btn btn-primary" [disabled]="!cardSelected || !products || !products.length" (click)="onPay()">Pagar</button>
+        </div>
     </div>
-  </div>
-</div>
 
 <app-add-card></app-add-card>

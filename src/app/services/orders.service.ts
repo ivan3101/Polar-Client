@@ -10,9 +10,7 @@ export class OrdersService {
     }
 
     createOrder(order) {
-        const options = { params: new HttpParams() };
-        options.params = options.params.append('id', this.userService.getUser()._id);
-        return this.httpClient.post(this.url, options);
+        return this.httpClient.post(this.url, order);
     }
 
     getOrdersByUser(state: string) {

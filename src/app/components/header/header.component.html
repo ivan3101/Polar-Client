@@ -7,7 +7,6 @@
     <a routerLink="/about-us" routerLinkActive="active" class="nav-link nav-text">Sobre nosotros</a>
     <a routerLink="/contact-us" routerLinkActive="active" class="nav-link nav-text">Contactanos</a>
     <a [routerLink]="['/adm', type, id, 'orders']" routerLinkActive="active" class="nav-link nav-text" *ngIf="innerWidth <= 768 && session">Pedidos</a>
-    <a [routerLink]="['/adm', type, id, 'profile']" routerLinkActive="active" class="nav-link nav-text" *ngIf="innerWidth <= 768 && session">Perfil</a>
     <a routerLinkActive="active" class="nav-link nav-text" *ngIf="innerWidth <= 768 && session" (click)="onLogout()">Cerrar Sesión</a>
   </div>
   <div class="header-actions">
@@ -28,7 +27,6 @@
         </button>
         <clr-dropdown-menu [clrPosition]="'bottom-right'" *clrIfOpen>
           <button type="button" clrDropdownItem (click)="onRedirecToOrders()">Pedidos</button>
-          <button type="button" clrDropdownItem (click)="onRedirecToProfile()">Perfil</button>
           <button type="button" clrDropdownItem (click)="onLogout()">Cerrar Sesión</button>
         </clr-dropdown-menu>
       </clr-dropdown>

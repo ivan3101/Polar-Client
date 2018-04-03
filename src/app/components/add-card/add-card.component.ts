@@ -70,35 +70,36 @@ export class AddCardComponent implements OnInit, OnDestroy {
 
     checkCvv(that) {
         return (formControl: AbstractControl) => {
-          if (formControl.value){
-              const cardNumber = that.cardForm.value.cardNumber;
-              if (cardNumber) {
-                  length = cardValidator.number(cardNumber).card.code.size;
-              } else {
-                  length = 3;
-              }
-              if (cardValidator.cvv(formControl.value, length).isValid) return null;
-              return {'checkCvv': true};
-          } else return null;
+            if (formControl.value){
+                const cardNumber = that.cardForm.value.cardNumber;
+                if (cardNumber) {
+                    length = cardValidator.number(cardNumber).card.code.size;
+                } else {
+                    length = 3;
+                }
+                if (cardValidator.cvv(formControl.value, length).isValid) return null;
+                return {'checkCvv': true};
+            } else return null;
         }
     }
 
     checkPastYear(formGroup: AbstractControl) {
-      const date = new Date(formGroup.value.year, formGroup.value.month - 1).getTime();
-      if (date > new Date().getTime()) return null;
-      else return {'checkPastYear': true};
+        const date = new Date(formGroup.value.year, formGroup.value.month - 1).getTime();
+        if (date > new Date().getTime()) return null;
+        else return {'checkPastYear': true};
     }
 
     doCustomClick(event) {
-      if (event === 'custom-next') {
-        this.onAddCard();
-        this.wizard.next();
-      } else if (event === 'custom-finish') {
-        this.cardForm.reset();
-        this.cardholderForm.reset();
-        this.wizard.reset();
-        this.wizard.finish();
-      }
+        if (event === 'custom-next') {
+            this.onAddCard();
+            this.wizard.next();
+        } else if (event === 'custom-finish') {
+            this.cardForm.reset();
+            this.cardholderForm.reset();
+            this.wizard.reset();
+            this.open = false;
+            this.wizard.finish();
+        }
     }
 
     onAddCard() {
@@ -119,9 +120,9 @@ export class AddCardComponent implements OnInit, OnDestroy {
                 this.userService.newCardEvent.next(true);
             },
             err => {
-              this.type = 'danger';
-              this.message = err.error.payload.message;
-              this.state = false;
+                this.type = 'danger';
+                this.message = err.error.payload.message;
+                this.state = false;
             });
     }
 

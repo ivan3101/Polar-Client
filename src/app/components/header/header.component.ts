@@ -27,15 +27,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
       if (this.authService.getToken() !== null) {
           this.session = true;
           this.id = this.userService.getUser()._id;
-          console.log(this.userService.getUser())
           if (this.userService.getUser().businessName) this.type = 'client';
           else this.type = 'employee';
       }
       this.sessionSubscription = this.userService.sessionEvent.subscribe(value => {
           this.session = value;
-          this.id = JSON.parse(localStorage.getItem('user'))._id;
-          if (JSON.parse(localStorage.getItem('user')).businessName) this.type = 'client';
-          else this.type = 'employee';
+          if (this.session) {
+              setTimeout(() => {
+                  this.id = this.userService.getUser()._id;
+                  if (this.userService.getUser().businessName) this.type = 'client';
+                  else this.type = 'employee';
+              }, 500);
+          }
       });
     }
 

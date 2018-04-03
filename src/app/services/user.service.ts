@@ -60,4 +60,8 @@ export class UserService {
     addClientCard(card, id) {
         return this.httpClient.put(`${this.url}/clients/${id}/cards`, card);
     }
+
+    deleteClientCard(card, id) {
+        return this.httpClient.delete(`${this.url}/clients/${id}/cards/${card}`);
+    }
 }
