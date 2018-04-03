@@ -49,9 +49,9 @@
                 <div class="card-block">
                     <div class="card-text">
                         <ul>
-                            <li>Numero de tarjeta: XXXXX{{ card.cardNumber.substring(0, card.cardNumber.length - 10) }}</li>
+                            <li>Numero de tarjeta: XXXX{{ card.cardNumber.substring(card.cardNumber.length - 4) }}</li>
                             <li>Nombre del tarjetahabiente: {{ card.cardholderName }}</li>
-                            <li>Fecha de vencimiento: {{ card.expDate | date }}</li>
+                            <li>Fecha de vencimiento: {{ card.expDate | date:'MM/yyyy' }}</li>
                         </ul>
                     </div>
                 </div>

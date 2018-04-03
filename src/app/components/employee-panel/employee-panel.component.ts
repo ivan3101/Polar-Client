@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, HostBinding, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-employee-panel',
@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./employee-panel.component.css']
 })
 export class EmployeePanelComponent implements OnInit {
-
+  @HostBinding('attr.class') class = 'content-container';
   constructor() { }
 
   ngOnInit() {

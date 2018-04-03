@@ -33,6 +33,8 @@ import {OrdersService} from './services/orders.service';
 import { PayComponent } from './components/pay/pay.component';
 import { AddCardComponent } from './components/add-card/add-card.component';
 import { DetailsModalComponent } from './components/details-modal/details-modal.component';
+import { AddProductComponent } from './components/add-product/add-product.component';
+import { AddEmployeeComponent } from './components/add-employee/add-employee.component';
 
 
 @NgModule({
@@ -56,6 +58,8 @@ import { DetailsModalComponent } from './components/details-modal/details-modal.
         PayComponent,
         AddCardComponent,
         DetailsModalComponent,
+        AddProductComponent,
+        AddEmployeeComponent,
     ],
     imports: [
         BrowserModule,

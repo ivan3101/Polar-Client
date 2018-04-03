@@ -14,12 +14,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
     session;
     type;
     id;
+    level;
     sessionSubscription: Subscription;
     innerWidth: number;
     constructor(private productsService: ProductsService, private userService: UserService, private authService: AuthService, private router: Router) {
         this.session = false;
         this.type = null;
         this.id = null;
+        this.level = null;
     }
 
     ngOnInit() {
@@ -36,7 +38,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
               setTimeout(() => {
                   this.id = this.userService.getUser()._id;
                   if (this.userService.getUser().businessName) this.type = 'client';
-                  else this.type = 'employee';
+                  else {
+                      this.type = 'employee';
+                      this.level = this.userService.getUser().level;
+                  }
               }, 500);
           }
       });
@@ -72,5 +77,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     onRedirecToProfile() {
         this.router.navigate(['/adm', this.type, this.id, 'profile']);
+    }
+
+    onRedirectToProducts() {
+        this.router.navigate(['/adm', this.type, this.id, 'products']);
+    }
+
+    onRedirectToEmployees() {
+        this.router.navigate(['/adm', this.type, this.id, 'employees']);
     }
 }

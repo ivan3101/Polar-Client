@@ -1,0 +1,124 @@
+<clr-alert [clrAlertType]="type" [(clrAlertClosed)]="open">
+  <div class="alert-item">
+        <span class="alert-text">
+            {{ message }}
+        </span>
+  </div>
+</clr-alert>
+<div class="row">
+  <div class="col-xs-12 col-lg-6 offset-lg-3">
+    <h2>Agregar Empleado</h2>
+  </div>
+  <div class="col-xs-12 col-lg-5 offset-lg-4">
+    <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+      <section class="form-block">
+        <div class="form-group row">
+          <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+            <label for="name" class="required">Nombre del empleado</label>
+          </div>
+          <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+            <label for="name" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-left tooltip-sm form-control"
+                   [class.invalid]="employeeForm.get('name').invalid
+                    && (employeeForm.get('name').dirty || employeeForm.get('name').touched)">
+              <input type="text" id="name" placeholder="John Smith" formControlName="name" class="form-control">
+              <span class="tooltip-content" *ngIf="employeeForm.get('name').errors && (employeeForm.get('name').errors.required && (employeeForm.get('name').dirty || employeeForm.get('name').touched))">
+                                Debe ingresar el nombre
+                            </span>
+              <span class="tooltip-content" *ngIf="employeeForm.get('name').errors && (employeeForm.get('name').errors.pattern && (employeeForm.get('name').dirty || employeeForm.get('name').touched))">
+                                Debe ingresar un nombre valido
+                            </span>
+            </label>
+          </div>
+        </div>
+        <div class="form-group row" formGroupName="cedula">
+          <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+            <label for="letter" class="required">Cedula del empleado</label>
+          </div>
+          <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+            <div class="select">
+              <select name="letter" id="letter" formControlName="letter">
+                <option value="e">E</option>
+                <option value="g">G</option>
+                <option value="j">J</option>
+                <option value="p">P</option>
+                <option value="v">V</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+            <label for="number" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-left tooltip-sm form-control"
+                   [class.invalid]="employeeForm.get('cedula.number').invalid
+                    && (employeeForm.get('cedula.number').dirty || employeeForm.get('cedula.number').touched)">
+              <input type="text" id="number" placeholder="12345678" formControlName="number" class="form-control">
+              <span class="tooltip-content" *ngIf="employeeForm.get('cedula.number').errors && (employeeForm.get('cedula.number').errors.required && (employeeForm.get('cedula.number').dirty || employeeForm.get('cedula.number').touched))">
+                                Debe ingresar la cedula
+                            </span>
+              <span class="tooltip-content" *ngIf="employeeForm.get('cedula.number').errors && (employeeForm.get('cedula.number').errors.pattern && (employeeForm.get('cedula.number').dirty || employeeForm.get('cedula.number').touched))">
+                                Debe ingresar una cedula valida
+                            </span>
+            </label>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+            <label for="email" class="required">Correo electronico</label>
+          </div>
+          <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+            <label for="email" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-left tooltip-sm form-control"
+                   [class.invalid]="employeeForm.get('email').invalid
+                    && (employeeForm.get('email').dirty || employeeForm.get('email').touched)">
+              <input type="email" id="email" placeholder="ejemplo@dominio.com" formControlName="email" class="form-control">
+              <span class="tooltip-content" *ngIf="employeeForm.get('email').errors && (employeeForm.get('email').errors.required && (employeeForm.get('email').dirty || employeeForm.get('email').touched))">
+                                Debe ingresar un correo electronico
+                            </span>
+              <span class="tooltip-content" *ngIf="employeeForm.get('email').errors && (employeeForm.get('email').errors.pattern && (employeeForm.get('email').dirty || employeeForm.get('email').touched))">
+                                No ingreso un correo electronico valido
+                            </span>
+            </label>
+          </div>
+        </div>
+        <section class="form-block" formGroupName="password">
+          <div class="form-group row">
+            <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+              <label for="newPassword" class="required">Contraseña</label>
+            </div>
+            <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+              <label for="newPassword" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-left tooltip-sm form-control"
+                     [class.invalid]="employeeForm.get('password.newPassword').invalid
+                    && (employeeForm.get('password.newPassword').dirty || employeeForm.get('password.newPassword').touched)">
+                <input type="password" id="newPassword" placeholder="******" formControlName="newPassword" class="form-control">
+                <span class="tooltip-content" *ngIf="employeeForm.get('password.newPassword').errors && (employeeForm.get('password.newPassword').errors.required && (employeeForm.get('password.newPassword').dirty || employeeForm.get('password.newPassword').touched))">
+                                Debe ingresar una contraseña
+                            </span>
+                <span class="tooltip-content" *ngIf="employeeForm.get('password.newPassword').errors && (employeeForm.get('password.newPassword').errors.minLength && (employeeForm.get('password.newPassword').dirty || employeeForm.get('password.newPassword').touched))">
+                                La contraseña debe tener un minimo de 6 caracteres
+                            </span>
+              </label>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+              <label for="confirmPassword" class="required">Confirmar Contraseña</label>
+            </div>
+            <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+              <label for="confirmPassword" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-left tooltip-sm form-control"
+                     [class.invalid]="(employeeForm.get('password.confirmPassword').invalid
+                    && (employeeForm.get('password.confirmPassword').dirty || employeeForm.get('password.confirmPassword').touched)) || (!employeeForm.get('password').valid && employeeForm.get('password.confirmPassword').valid && employeeForm.get('password.confirmPassword').touched && employeeForm.get('password.newPassword').valid && employeeForm.get('password.newPassword').touched)">
+                <input type="password" id="confirmPassword" placeholder="******" formControlName="confirmPassword" class="form-control">
+                <span class="tooltip-content" *ngIf="employeeForm.get('password.confirmPassword').errors && (employeeForm.get('password.confirmPassword').errors.required && (employeeForm.get('password.confirmPassword').dirty || employeeForm.get('password.confirmPassword').touched))">
+                                Debe confirmar su contraseña
+                            </span>
+                <span class="tooltip-content" *ngIf="!employeeForm.get('password').valid && employeeForm.get('password.confirmPassword').valid && employeeForm.get('password.confirmPassword').touched && employeeForm.get('password.newPassword').valid && employeeForm.get('password.newPassword').touched">
+                                Las contraseñas no coinciden
+                            </span>
+              </label>
+            </div>
+          </div>
+        </section>
+      </section>
+      <div class="col-xs-12 col-lg-3">
+        <button type="submit" class="btn btn-primary" [disabled]="!employeeForm.valid">Agregar empleado</button>
+      </div>
+    </form>
+  </div>
+</div>

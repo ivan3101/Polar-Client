@@ -12,6 +12,8 @@ import {EmployeeAuthService} from "./services/employee-auth.service";
 import {ProfileComponent} from "./components/profile/profile.component";
 import {OrdersComponent} from "./components/orders/orders.component";
 import {PayComponent} from "./components/pay/pay.component";
+import {AddEmployeeComponent} from './components/add-employee/add-employee.component';
+import {AddProductComponent} from './components/add-product/add-product.component';
 
 const appRoutes: Routes = [
     {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -33,7 +35,8 @@ const appRoutes: Routes = [
                 ]},
             {path: 'employee/:id', component: EmployeePanelComponent, canActivate: [EmployeeAuthService], children: [
                     {path: '', pathMatch: 'full', redirectTo: 'orders'},
-                    {path: 'profile', component: ProfileComponent},
+                    {path: 'employees', component: AddEmployeeComponent},
+                    {path: 'products', component: AddProductComponent},
                     {path: 'orders', component: OrdersComponent}
                 ]}
         ]},

@@ -7,6 +7,9 @@
     <a routerLink="/about-us" routerLinkActive="active" class="nav-link nav-text">Sobre nosotros</a>
     <a routerLink="/contact-us" routerLinkActive="active" class="nav-link nav-text">Contactanos</a>
     <a [routerLink]="['/adm', type, id, 'orders']" routerLinkActive="active" class="nav-link nav-text" *ngIf="innerWidth <= 768 && session">Pedidos</a>
+    <a [routerLink]="['/adm', type, id, 'employees']" routerLinkActive="active" class="nav-link nav-text" *ngIf="innerWidth <= 768 && session && type === 'employee'" >Agregar Empleado</a>
+    <a [routerLink]="['/adm', type, id, 'products']" routerLinkActive="active" class="nav-link nav-text" *ngIf="innerWidth <= 768 && session && type === 'employee'">Agregar Producto</a>
+
     <a routerLinkActive="active" class="nav-link nav-text" *ngIf="innerWidth <= 768 && session" (click)="onLogout()">Cerrar Sesión</a>
   </div>
   <div class="header-actions">
@@ -27,10 +30,13 @@
         </button>
         <clr-dropdown-menu [clrPosition]="'bottom-right'" *clrIfOpen>
           <button type="button" clrDropdownItem (click)="onRedirecToOrders()">Pedidos</button>
+          <button type="button" clrDropdownItem (click)="onRedirectToEmployees()" *ngIf="type === 'employee' && level === 'admin'">Agregar Empleado</button>
+          <button type="button" clrDropdownItem (click)="onRedirectToProducts()" *ngIf="type === 'employee'">Agregar Producto</button>
           <button type="button" clrDropdownItem (click)="onLogout()">Cerrar Sesión</button>
         </clr-dropdown-menu>
       </clr-dropdown>
     </div>
+
     <ng-template #mobile>
       <a class="nav-link nav-icon" style="color: #F4F1E6;" (click)="onOpenCart()">
         <clr-icon shape="shopping-cart" class="is-solid"></clr-icon>
