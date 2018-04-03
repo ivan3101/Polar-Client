@@ -1,0 +1,136 @@
+<clr-alert [clrAlertType]="type" [(clrAlertClosed)]="open">
+  <div class="alert-item">
+        <span class="alert-text">
+            {{ message }}
+        </span>
+  </div>
+</clr-alert>
+
+<div class="row">
+  <div class="col-xs-12 col-lg-6 offset-lg-3">
+    <h2>Agregar Empleado</h2>
+  </div>
+  <div class="col-xs-12 col-lg-5 offset-lg-4">
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+      <section class="form-block">
+        <div class="form-group row">
+          <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+            <label for="name" class="required">Nombre del producto</label>
+          </div>
+          <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+            <label for="name" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-left tooltip-sm form-control"
+                   [class.invalid]="productForm.get('name').invalid
+                    && (productForm.get('name').dirty || productForm.get('name').touched)">
+              <input type="text" id="name" placeholder="John Smith" formControlName="name" class="form-control">
+              <span class="tooltip-content" *ngIf="productForm.get('name').errors && (productForm.get('name').errors.required && (productForm.get('name').dirty || productForm.get('name').touched))">
+                                Debe ingresar el nombre
+                            </span>
+              <span class="tooltip-content" *ngIf="productForm.get('name').errors && (productForm.get('name').errors.pattern && (productForm.get('name').dirty || productForm.get('name').touched))">
+                                Debe ingresar un nombre valido
+                            </span>
+            </label>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+            <label for="imagePath" class="required">Url de la imagen</label>
+          </div>
+          <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+            <label for="imagePath" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-left tooltip-sm form-control"
+                   [class.invalid]="productForm.get('imagePath').invalid
+                    && (productForm.get('imagePath').dirty || productForm.get('imagePath').touched)">
+              <input type="text" id="imagePath" placeholder="" formControlName="imagePath" class="form-control">
+              <span class="tooltip-content" *ngIf="productForm.get('imagePath').errors && (productForm.get('imagePath').errors.required && (productForm.get('imagePath').dirty || productForm.get('imagePath').touched))">
+                                Debe ingresar la url de la imagen
+                            </span>
+            </label>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+            <label for="weight" class="required">Peso del producto</label>
+          </div>
+          <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+            <label for="weight" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-left tooltip-sm form-control"
+                   [class.invalid]="productForm.get('weight').invalid
+                    && (productForm.get('weight').dirty || productForm.get('weight').touched)">
+              <input type="number" id="weight" placeholder="John Smith" formControlName="weight" class="form-control">
+              <span class="tooltip-content" *ngIf="productForm.get('weight').errors && (productForm.get('weight').errors.required && (productForm.get('weight').dirty || productForm.get('weight').touched))">
+                                Debe ingresar el peso
+                            </span>
+              <span class="tooltip-content" *ngIf="productForm.get('weight').errors && (productForm.get('weight').errors.pattern && (productForm.get('weight').dirty || productForm.get('weight').touched))">
+                                Debe ingresar un peso valido
+                            </span>
+            </label>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+            <label for="stock" class="required">Stock del producto</label>
+          </div>
+          <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+            <label for="stock" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-left tooltip-sm form-control"
+                   [class.invalid]="productForm.get('stock').invalid
+                    && (productForm.get('stock').dirty || productForm.get('stock').touched)">
+              <input type="number" id="stock" placeholder="10" formControlName="stock" class="form-control">
+              <span class="tooltip-content" *ngIf="productForm.get('stock').errors && (productForm.get('stock').errors.required && (productForm.get('stock').dirty || productForm.get('stock').touched))">
+                                Debe ingresar el stock
+                            </span>
+              <span class="tooltip-content" *ngIf="productForm.get('stock').errors && (productForm.get('stock').errors.pattern && (productForm.get('stock').dirty || productForm.get('stock').touched))">
+                                Debe ingresar un stock valido
+                            </span>
+            </label>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+            <label for="price" class="required">Precio</label>
+          </div>
+          <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+            <label for="price" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-left tooltip-sm form-control"
+                   [class.invalid]="productForm.get('price').invalid
+                    && (productForm.get('price').dirty || productForm.get('price').touched)">
+              <input type="number" id="price" placeholder="" formControlName="price" class="form-control">
+              <span class="tooltip-content" *ngIf="productForm.get('price').errors && (productForm.get('price').errors.required && (productForm.get('price').dirty || productForm.get('price').touched))">
+                                Debe ingresar el precio
+                            </span>
+              <span class="tooltip-content" *ngIf="productForm.get('price').errors && (productForm.get('price').errors.pattern && (productForm.get('price').dirty || productForm.get('price').touched))">
+                                Debe ingresar un precio valido
+                            </span>
+            </label>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+            <label for="brand" class="required">Marca</label>
+          </div>
+          <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+            <div class="select">
+              <select name="brand" id="brand" formControlName="brand">
+                <option value="pampero">Pampero</option>
+                <option value="toddy">Toddy</option>
+                <option value="mavesa">Mavesa</option>
+                <option value="chiffon">Chiffon</option>
+                <option value="dogourmet">Dogourmet</option>
+                <option value="primor">Primor</option>
+                <option value="supercan">SuperCan</option>
+                <option value="migurt">Migurt</option>
+                <option value="golden">Golden</option>
+                <option value="cachapas p.a.n.">Cachapas P.A.N.</option>
+                <option value="p.a.n.">P.A.N.</option>
+                <option value="mazeite">Mazeite</option>
+                <option value="margarita">Margarita</option>
+                <option value="rikesa cheddar">Rikesa Cheddar</option>
+                <option value="lipton">Lipton</option>
+                <option value="quacker">Quacker</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="col-xs-12 col-lg-3">
+        <button type="submit" class="btn btn-primary" [disabled]="!productForm.valid">Agregar empleado</button>
+      </div>
+    </form>
+  </div>
+</div>

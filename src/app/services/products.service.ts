@@ -12,6 +12,7 @@ export class ProductsService {
   updateCartEvent = new Subject<Boolean>();
   updateStockEvent = new Subject();
   stockUpdatedEvent = new Subject();
+  addProductEvent = new Subject();
   constructor(private httpClient: HttpClient) {
     this.url = 'http://localhost:3000/api/products';
   }
@@ -27,6 +28,10 @@ export class ProductsService {
 
   getSingleProduct(id: string): Observable<Product> {
     return this.httpClient.get<Product>(`${this.url}/${id}`);
+  }
+
+  addProduct(product) {
+    return this.httpClient.post(`${this.url}`, product);
   }
 
   updateProduct(id, fields) {
