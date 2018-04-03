@@ -26,4 +26,8 @@ export class ProductsService {
   getSingleProduct(id: string): Observable<Product> {
     return this.httpClient.get<Product>(`${this.url}/${id}`);
   }
+
+  updateProduct(id, fields) {
+    return this.httpClient.put(`${this.url}/${id}`, fields);
+  }
 }
