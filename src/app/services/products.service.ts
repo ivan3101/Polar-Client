@@ -10,6 +10,8 @@ export class ProductsService {
   url;
   openCartEvent = new Subject<Boolean>();
   updateCartEvent = new Subject<Boolean>();
+  updateStockEvent = new Subject();
+  stockUpdatedEvent = new Subject();
   constructor(private httpClient: HttpClient) {
     this.url = 'http://localhost:3000/api/products';
   }

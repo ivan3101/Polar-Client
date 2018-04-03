@@ -4,6 +4,7 @@ import {ProductsService} from "../../services/products.service";
 import {Product} from "../../models/product.model";
 import {Subscription} from "rxjs/Subscription";
 import {AbstractControl, FormControl, FormGroup, Validators} from "@angular/forms";
+import {UserService} from '../../services/user.service';
 
 @Component({
     selector: 'app-grid-products',
@@ -15,9 +16,14 @@ export class GridProductsComponent implements OnInit, OnDestroy {
     product;
     cart;
     open: boolean;
+    type;
     addForm: FormGroup;
     updateCartSubscription: Subscription;
-    constructor(private route: ActivatedRoute, private router: Router, private productsService: ProductsService) {
+    session: Subscription;
+    stockUpdated: Subscription;
+    constructor(private route: ActivatedRoute, private router: Router, private productsService: ProductsService, private userService: UserService) {
+        this.selected = null;
+        this.type = null;
         this.cart = JSON.parse(localStorage.getItem('cart')) || [];
         this.open = false;
         this.product = null;
@@ -36,10 +42,39 @@ export class GridProductsComponent implements OnInit, OnDestroy {
             'name': new FormControl({value: null, disabled: true}, [Validators.required]),
             'stock': new FormControl(null, [Validators.required])
         });
+        if (this.userService.getUser()) {
+            if (this.userService.getUser().businessName) this.type = 'client';
+            else this.type = 'employee';
+        }
+        this.session = this.userService.sessionEvent.subscribe(value => {
+            if (value) {
+                if (this.userService.getUser()) {
+                    if (this.userService.getUser().businessName) this.type = 'client';
+                    else this.type = 'employee';
+                }
+            } else {
+                this.type = null;
+            }
+        });
+        this.stockUpdated = this.productsService.stockUpdatedEvent.subscribe(() => {
+            if(this.router.url.split('/')[2] === '/products/all'.split('/')[2]) {
+                this.products = this.productsService.getAllProducts();
+            } else if(this.router.url.split('/')[2] === '/products/brand/'.split('/')[2]) {
+                this.route.paramMap.subscribe((params: ParamMap) => this.products = this.productsService.getAllProducts(undefined, undefined, params.get('brand')));
+            } else if(this.router.url.split('/')[2] === '/products/unavailable'.split('/')[2]) {
+                this.products = this.productsService.getAllProducts(undefined, undefined, undefined, false)
+            }
+        })
     }
 
     ngOnDestroy() {
         this.updateCartSubscription.unsubscribe();
+        this.session.unsubscribe();
+        this.stockUpdated.unsubscribe();
+    }
+
+    onUpdateStock(product) {
+        this.productsService.updateStockEvent.next(product);
     }
 
     onAddToCart() {
