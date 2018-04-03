@@ -87,8 +87,9 @@ export class GridProductsComponent implements OnInit, OnDestroy {
         this.open = false;
     }
 
-    onRemoveFromCart(index: number) {
+    onRemoveFromCart(product) {
         this.cart = JSON.parse(localStorage.getItem('cart'));
+        const index = this.cart.findIndex(value => value._id === product._id);
         this.cart.splice(index, 1);
         localStorage.setItem('cart', JSON.stringify(this.cart));
         this.productsService.updateCartEvent.next(true);

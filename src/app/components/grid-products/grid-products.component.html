@@ -14,7 +14,7 @@
         </button>
         <button type="button" class="btn btn-sm btn-link" (click)="onUpdateStock(product)" *ngIf="type === 'employee'">Actualizar stock</button>
         <ng-template #remove>
-          <button class="btn btn-sm btn-link btn-icon" style="color: #C92100;" (click)="onRemoveFromCart(i)">
+          <button class="btn btn-sm btn-link btn-icon" style="color: #C92100;" (click)="onRemoveFromCart(product)">
             <clr-icon shape="window-close"></clr-icon>
             Remover del carrito
           </button>

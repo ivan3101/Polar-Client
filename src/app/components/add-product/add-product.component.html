@@ -21,7 +21,7 @@
             <label for="name" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-left tooltip-sm form-control"
                    [class.invalid]="productForm.get('name').invalid
                     && (productForm.get('name').dirty || productForm.get('name').touched)">
-              <input type="text" id="name" placeholder="John Smith" formControlName="name" class="form-control">
+              <input type="text" id="name" placeholder="Harina P.A.N." formControlName="name" class="form-control">
               <span class="tooltip-content" *ngIf="productForm.get('name').errors && (productForm.get('name').errors.required && (productForm.get('name').dirty || productForm.get('name').touched))">
                                 Debe ingresar el nombre
                             </span>
@@ -48,13 +48,13 @@
         </div>
         <div class="form-group row">
           <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
-            <label for="weight" class="required">Peso del producto</label>
+            <label for="weight" class="required">Peso del producto (Kg)</label>
           </div>
           <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
             <label for="weight" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-left tooltip-sm form-control"
                    [class.invalid]="productForm.get('weight').invalid
                     && (productForm.get('weight').dirty || productForm.get('weight').touched)">
-              <input type="number" id="weight" placeholder="John Smith" formControlName="weight" class="form-control">
+              <input type="number" id="weight" placeholder="" formControlName="weight" class="form-control">
               <span class="tooltip-content" *ngIf="productForm.get('weight').errors && (productForm.get('weight').errors.required && (productForm.get('weight').dirty || productForm.get('weight').touched))">
                                 Debe ingresar el peso
                             </span>
@@ -129,7 +129,7 @@
         </div>
       </section>
       <div class="col-xs-12 col-lg-3">
-        <button type="submit" class="btn btn-primary" [disabled]="!productForm.valid">Agregar empleado</button>
+        <button type="submit" class="btn btn-primary" [disabled]="!productForm.valid">Agregar producto</button>
       </div>
     </form>
   </div>

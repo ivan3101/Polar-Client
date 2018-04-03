@@ -1,6 +1,7 @@
 <div class="row">
     <div class="offset-md-2">
-        <h2>Mis pedidos</h2>
+        <h2 *ngIf="type === 'client'">Mis pedidos</h2>
+        <h2 *ngIf="type === 'employee'">Pedidos</h2>
     </div>
 </div>
 <div class="row">
@@ -19,6 +20,7 @@
 
             <clr-dg-row *clrDgItems="let order of ordersPending | async" [clrDgItem]="order">
                 <clr-dg-action-overflow>
+                    <button class="action-item" (click)="onSend(order._id)" *ngIf="type === 'employee'">Entregado</button>
                     <button class="action-item" (click)="onDelete(order._id)">Cancelar</button>
                 </clr-dg-action-overflow>
                 <clr-dg-cell>{{order.buyer.businessName}}</clr-dg-cell>
@@ -27,9 +29,9 @@
             </clr-dg-row>
 
             <clr-dg-footer>
-                <clr-dg-pagination #pagination [clrDgPageSize]="5">
-                    {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
-                    de {{pagination.totalItems}} pedidos
+                <clr-dg-pagination #pagination1 [clrDgPageSize]="5">
+                    {{pagination1.firstItem + 1}} - {{pagination1.lastItem + 1}}
+                    de {{pagination1.totalItems}} pedidos
                 </clr-dg-pagination>
             </clr-dg-footer>
         </clr-datagrid>
@@ -56,9 +58,9 @@
             </clr-dg-row>
 
             <clr-dg-footer>
-                <clr-dg-pagination #pagination [clrDgPageSize]="5">
-                    {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
-                    de {{pagination.totalItems}} pedidos
+                <clr-dg-pagination #pagination2 [clrDgPageSize]="5">
+                    {{pagination2.firstItem + 1}} - {{pagination2.lastItem + 1}}
+                    de {{pagination2.totalItems}} pedidos
                 </clr-dg-pagination>
             </clr-dg-footer>
         </clr-datagrid>
@@ -85,9 +87,9 @@
             </clr-dg-row>
 
             <clr-dg-footer>
-                <clr-dg-pagination #pagination [clrDgPageSize]="5">
-                    {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
-                    de {{pagination.totalItems}} pedidos
+                <clr-dg-pagination #pagination3 [clrDgPageSize]="5">
+                    {{pagination3.firstItem + 1}} - {{pagination3.lastItem + 1}}
+                    de {{pagination3.totalItems}} pedidos
                 </clr-dg-pagination>
             </clr-dg-footer>
         </clr-datagrid>

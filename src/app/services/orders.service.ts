@@ -13,6 +13,13 @@ export class OrdersService {
         return this.httpClient.post(this.url, order);
     }
 
+    getAllOrders(state) {
+        const options = { params: new HttpParams() };
+        options.params = options.params.append('state', state);
+        options.params = options.params.append('id', this.userService.getUser()._id);
+        return this.httpClient.get(`${this.url}`, options);
+    }
+
     getOrdersByUser(state: string) {
         const options = { params: new HttpParams() };
         options.params = options.params.append('state', state);
@@ -20,8 +27,10 @@ export class OrdersService {
         return this.httpClient.get(`${this.url}/clients`, options);
     }
 
-    cancelOrder(id) {
-        return this.httpClient.put(`${this.url}/${id}`, {});
+    cancelOrder(id, state) {
+        const options = { params: new HttpParams() };
+        options.params = options.params.append('state', state);
+        return this.httpClient.put(`${this.url}/${id}`, {}, options);
     }
 
 }
