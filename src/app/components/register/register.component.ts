@@ -35,7 +35,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.openRegisterSubscription = this.userService.openRegisterEvent.subscribe((value: boolean) => this.open = value);
         this.basicForm = new FormGroup({
-            'businessName': new FormControl(null, [Validators.required, Validators.pattern('^(?![0-9.,])[a-z0-9\\s.,]+$')]),
+            'businessName': new FormControl(null, [Validators.required, Validators.pattern('^(?![0-9.,])[a-zA-Z0-9\\s.,]+$')]),
             'rif': new FormGroup({
                 'letter': new FormControl('e', [Validators.required, Validators.pattern('^([VEJPGvejpg])$')]),
                 'number': new FormControl(null, [Validators.required, Validators.pattern('^([0-9]{8})$'), Validators.maxLength(8)]),
