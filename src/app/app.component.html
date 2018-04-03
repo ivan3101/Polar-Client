@@ -1,8 +1,8 @@
 <app-cart></app-cart>
-<!--<ng-template *ngIf="session">-->
+<div *ngIf="!session">
   <app-login></app-login>
   <app-register></app-register>
-<!--</ng-template>-->
+</div>
 <clr-main-container>
   <app-app-alert></app-app-alert>
   <app-header *ngIf="!checkRoute('/home')"></app-header>

@@ -27,6 +27,11 @@ import { ClientPanelComponent } from './components/client-panel/client-panel.com
 import { EmployeePanelComponent } from './components/employee-panel/employee-panel.component';
 import {ClientAuthService} from "./services/client-auth.service";
 import {EmployeeAuthService} from "./services/employee-auth.service";
+import { ProfileComponent } from './components/profile/profile.component';
+import { OrdersComponent } from './components/orders/orders.component';
+import {OrdersService} from './services/orders.service';
+import { PayComponent } from './components/pay/pay.component';
+import { AddCardComponent } from './components/add-card/add-card.component';
 
 
 @NgModule({
@@ -45,6 +50,10 @@ import {EmployeeAuthService} from "./services/employee-auth.service";
         RegisterComponent,
         ClientPanelComponent,
         EmployeePanelComponent,
+        ProfileComponent,
+        OrdersComponent,
+        PayComponent,
+        AddCardComponent,
     ],
     imports: [
         BrowserModule,
@@ -60,7 +69,8 @@ import {EmployeeAuthService} from "./services/employee-auth.service";
         AppAlertService,
         AuthService,
         ClientAuthService,
-        EmployeeAuthService
+        EmployeeAuthService,
+        OrdersService
     ],
     bootstrap: [AppComponent]
 })

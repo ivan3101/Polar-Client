@@ -9,6 +9,9 @@ import {ClientPanelComponent} from "./components/client-panel/client-panel.compo
 import {EmployeePanelComponent} from "./components/employee-panel/employee-panel.component";
 import {ClientAuthService} from "./services/client-auth.service";
 import {EmployeeAuthService} from "./services/employee-auth.service";
+import {ProfileComponent} from "./components/profile/profile.component";
+import {OrdersComponent} from "./components/orders/orders.component";
+import {PayComponent} from "./components/pay/pay.component";
 
 const appRoutes: Routes = [
     {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -23,9 +26,18 @@ const appRoutes: Routes = [
     {path: 'contact-us', component: ContactUsComponent},
     {path: 'adm', children: [
             {path: '', redirectTo: '/products/all', pathMatch: 'full'},
-            {path: 'client/:id', component: ClientPanelComponent, canActivate: [ClientAuthService]},
-            {path: 'employee/:id', component: EmployeePanelComponent, canActivate: [EmployeeAuthService]}
+            {path: 'client/:id', component: ClientPanelComponent, canActivate: [ClientAuthService], children: [
+                    {path: '', pathMatch: 'full', redirectTo: 'orders'},
+                    {path: 'profile', component: ProfileComponent},
+                    {path: 'orders', component: OrdersComponent}
+                ]},
+            {path: 'employee/:id', component: EmployeePanelComponent, canActivate: [EmployeeAuthService], children: [
+                    {path: '', pathMatch: 'full', redirectTo: 'orders'},
+                    {path: 'profile', component: ProfileComponent},
+                    {path: 'orders', component: OrdersComponent}
+                ]}
         ]},
+    {path: 'pay', component: PayComponent, canActivate: [ClientAuthService]},
     {path: '**', redirectTo: '/home'}
 ];
 
